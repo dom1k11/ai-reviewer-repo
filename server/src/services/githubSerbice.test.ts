@@ -1,12 +1,14 @@
 import { describe, it, expect, vi, type Mock } from "vitest";
 import { getRepoTree } from "./githubService";
 import { githubRequest } from "@/clients/githubClient";
+import { getFileContent } from "./githubService";
+
 vi.mock("@/clients/githubClient", () => ({
   githubRequest: vi.fn(),
 }));
 
-describe("To make sure that github services are working", () => {
-  it("should get proper RepoTree on selected owener and repo", async () => {
+describe("getRepoTree", () => {
+  it("should return repo tree if request is succesful", async () => {
     const mockResponse = {
       tree: [
         { path: "index.js", sha: "12345", type: "blob" },
@@ -14,7 +16,7 @@ describe("To make sure that github services are working", () => {
       ],
     };
 
-    (githubRequest as Mock).mockResolvedValue(mockResponse);
+    (githubRequest as Mock).mockResolvedValueOnce(mockResponse);
 
     const result = await getRepoTree("dom1k11", "code-template");
 
@@ -26,4 +28,51 @@ describe("To make sure that github services are working", () => {
       recursive: "1",
     });
   });
+
+  it("should throw and error if service is failed", async () => {
+    (githubRequest as Mock).mockRejectedValueOnce(new Error("Not Found"));
+
+    await expect(getRepoTree("dom1k11", "code-template")).rejects.toThrow(
+      "Failed to fetch repo tree"
+    );
+  });
 });
+
+vi.mock("@/clients/githubClient", () => ({
+  githubRequest: vi.fn(),
+}));
+
+describe("getFileContent", () => {
+  it("should return decoded content from github parsed files", async () => {
+    const mockBase64 = Buffer.from("console.log('hello');", "utf8").toString("base64");
+    const mockResponse = { content: mockBase64 };
+
+    (githubRequest as Mock).mockResolvedValueOnce(mockResponse);
+
+    const result = await getFileContent("dom1k11", "code-template", "12345");
+
+    expect(result).toBe("console.log('hello');");
+    expect(githubRequest).toHaveBeenCalledWith("GET /repos/{owner}/{repo}/git/blobs/{file_sha}", {
+      owner: "dom1k11",
+      repo: "code-template",
+      file_sha: "12345",
+    });
+  });
+
+  it("should throw and error if content is not present", async () => {
+    (githubRequest as Mock).mockResolvedValueOnce({});
+
+    await expect(getFileContent("dom1k11", "code-template", "abc123")).rejects.toThrow(
+      "[getFileContent] missing content for sha: abc123"
+    );
+  });
+
+  it("should throw and error if service is failed", async () => {
+    (githubRequest as Mock).mockRejectedValueOnce(new Error("Failed to fetch file content"));
+
+    await expect(getFileContent("dom1k11", "code-template", "failSha")).rejects.toThrow(
+      "Failed to fetch file content"
+    );
+  });
+});
+

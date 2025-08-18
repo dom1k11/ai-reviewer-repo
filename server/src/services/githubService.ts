@@ -2,16 +2,21 @@ import { githubRequest } from "@/clients/githubClient";
 import { parseRepoUrl } from "@/utils/getRepo";
 
 export async function getRepoTree(owner: string, repo: string, branch = "main") {
-  console.log("📁 [getRepoTree] owner:", owner, "repo:", repo, "branch:", branch);
+  try {
+    console.log("📁 [getRepoTree] owner:", owner, "repo:", repo, "branch:", branch);
 
-  const request = await githubRequest("GET /repos/{owner}/{repo}/git/trees/{tree_sha}", {
-    owner,
-    repo,
-    tree_sha: branch,
-    recursive: "1",
-  });
+    const request = await githubRequest("GET /repos/{owner}/{repo}/git/trees/{tree_sha}", {
+      owner,
+      repo,
+      tree_sha: branch,
+      recursive: "1",
+    });
 
-  return request;
+    return request;
+  } catch (err) {
+    console.error("❌ Failed to fetch repo tree:", err);
+    throw new Error("Failed to fetch repo tree");
+  }
 }
 
 type GitHubBlobResponse = { content?: string };
@@ -23,33 +28,43 @@ export async function getFileContent(
 ): Promise<string> {
   console.log("📄 [getFileContent] owner:", owner, "repo:", repo, "sha:", fileSha);
 
-  const blob: GitHubBlobResponse = await githubRequest(
-    "GET /repos/{owner}/{repo}/git/blobs/{file_sha}",
-    { owner, repo, file_sha: fileSha }
-  );
+  try {
+    const blob: GitHubBlobResponse = await githubRequest(
+      "GET /repos/{owner}/{repo}/git/blobs/{file_sha}",
+      { owner, repo, file_sha: fileSha }
+    );
 
-  if (!blob.content) {
-    throw new Error(`[getFileContent] missing content for sha: ${fileSha}`);
+    if (!blob.content) {
+      throw new Error(`[getFileContent] missing content for sha: ${fileSha}`);
+    }
+
+    return Buffer.from(blob.content, "base64").toString("utf8");
+  } catch (err) {
+    console.error("❌ Failed to fetch file content:", err);
+    throw err;
   }
-
-  return Buffer.from(blob.content, "base64").toString("utf8");
 }
 
 export async function filterExts(owner: string, repo: string) {
-  const tree = await getRepoTree(owner, repo);
-  const ALLOWED_EXTS = [".ts", ".js", ".json", ".html", ".css", ".vue", ".tsx", ".jsx"];
+  try {
+    const { tree } = await getRepoTree(owner, repo);
 
-  const files = tree.tree.filter(
-    (f) =>
-      f.type === "blob" &&
-      ALLOWED_EXTS.some((ext) => f.path.endsWith(ext)) &&
-      !f.path.includes("node_modules") &&
-      !f.path.startsWith(".")
-  );
+    const ALLOWED_EXTS = [".ts", ".js", ".json", ".html", ".css", ".vue", ".tsx", ".jsx"];
 
-  const parsedFiles = files.map((f) => ({
-    sha: f.sha,
-    path: f.path,
-  }));
-  return parsedFiles;
+    return tree
+      .filter(
+        (file) =>
+          file.type === "blob" &&
+          ALLOWED_EXTS.some((ext) => file.path.endsWith(ext)) &&
+          !file.path.includes("node_modules") &&
+          !file.path.startsWith(".")
+      )
+      .map((file) => ({
+        sha: file.sha,
+        path: file.path,
+      }));
+  } catch (err) {
+    console.error("❌ Failed to filter files from repo tree:", err);
+    throw new Error("Failed to filter allowed files");
+  }
 }
