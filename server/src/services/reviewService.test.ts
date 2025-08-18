@@ -36,7 +36,8 @@ describe("reviewAndStoreRepo", () => {
       { sha: "sha1", path: "index.js" },
       { sha: "sha2", path: "App.vue" },
     ]);
-    (githubService.getFileContent as Mock).mockResolvedValueOnce("console.log('hi')")
+    (githubService.getFileContent as Mock)
+      .mockResolvedValueOnce("console.log('hi')")
       .mockResolvedValueOnce("export default {}");
     (openaiService.generateReview as Mock).mockResolvedValue("Review\nScore: 85");
     (openaiService.extractScoreFromReview as Mock).mockReturnValue(85);

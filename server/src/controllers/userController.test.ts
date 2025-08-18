@@ -28,8 +28,6 @@ describe("syncUserWithDatabase", () => {
     expect(res.json).toHaveBeenCalledWith(mockUser);
   });
 
- 
-
   it("should return 500 on error", async () => {
     vi.spyOn(userModel, "findOrCreateUser").mockRejectedValue(new Error("DB fail"));
 
@@ -98,8 +96,6 @@ describe("handleGetUser", () => {
 
     expect(res.json).toHaveBeenCalledWith(mockUser);
   });
-
-  
 
   it("should return 500 on error", async () => {
     vi.spyOn(userModel, "getUserBySub").mockRejectedValue(new Error("DB error"));

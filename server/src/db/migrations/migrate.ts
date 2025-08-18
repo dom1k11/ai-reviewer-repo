@@ -9,7 +9,10 @@ const pool = new pg.Pool({
 
 async function runMigrations() {
   const migrationsDir = path.resolve("src", "db", "migrations");
-  const files = fs.readdirSync(migrationsDir).filter(f => f.endsWith(".sql")).sort();
+  const files = fs
+    .readdirSync(migrationsDir)
+    .filter((f) => f.endsWith(".sql"))
+    .sort();
 
   for (const file of files) {
     const sql = fs.readFileSync(path.join(migrationsDir, file), "utf8");

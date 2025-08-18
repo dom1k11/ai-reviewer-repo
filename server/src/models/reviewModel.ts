@@ -15,7 +15,6 @@ export async function getReviewsByUserId(userId: number): Promise<Review[]> {
   return result.rows as Review[];
 }
 
-
 export async function getReviewById(reviewId: number): Promise<Review> {
   {
     const result = await pool.query("SELECT * from reviews WHERE id = $1", [reviewId]);

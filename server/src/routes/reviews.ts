@@ -1,5 +1,9 @@
 import { Router } from "express";
-import { handleGetReviewById, handleGetUserReviews, handlePostMessage } from "@/controllers/reviewController";
+import {
+  handleGetReviewById,
+  handleGetUserReviews,
+  handlePostMessage,
+} from "@/controllers/reviewController";
 import { validateBody } from "@/middleware/validate";
 import { PostURLSchema } from "@/controllers/validators/urlValidator";
 import { checkJwt } from "@/middleware/auth0";
@@ -7,7 +11,7 @@ import { checkJwt } from "@/middleware/auth0";
 const router = Router();
 
 router.post("/", checkJwt, validateBody(PostURLSchema), handlePostMessage);
-router.get("/", handleGetUserReviews) //TODO: Add validation
-router.get("/:id", handleGetReviewById) //TODO: Add validation
+router.get("/", handleGetUserReviews); //TODO: Add validation
+router.get("/:id", handleGetReviewById); //TODO: Add validation
 
 export default router;

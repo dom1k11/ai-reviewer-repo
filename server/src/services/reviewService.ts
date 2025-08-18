@@ -17,9 +17,7 @@ export async function reviewAndStoreRepo({ sub, repoUrl }: { sub: string; repoUr
       throw new Error(`No supported files found in ${owner}/${repo}`);
     }
 
-    const codes = await Promise.all(
-      files.map(({ sha }) => getFileContent(owner, repo, sha))
-    );
+    const codes = await Promise.all(files.map(({ sha }) => getFileContent(owner, repo, sha)));
 
     const fullCode = codes.join("\n\n/* --- next file --- */\n\n");
     const review = await generateReview(fullCode);

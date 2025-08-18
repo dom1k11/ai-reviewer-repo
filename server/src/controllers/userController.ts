@@ -3,7 +3,6 @@ import type { Request, Response } from "express";
 import type { User } from "@/types/user";
 import { AuthPayload } from "@/models/authPayload";
 
-
 export async function syncUserWithDatabase(req: Request, res: Response): Promise<void> {
   try {
     const {

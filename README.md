@@ -29,7 +29,7 @@ AI Reviewer Assistant automatically generates structured code reviews for GitHub
 git clone https://github.com/TuringCollegeSubmissions/dsedus-WD2.3.4.5.git
 npm install
 npm run dev
-````
+```
 
 ## 📁 Project Structure
 
@@ -44,4 +44,3 @@ server/
     utils/             → Helpers (parsers, formatters)
     config/            → Configuration and constants
 ```
-
