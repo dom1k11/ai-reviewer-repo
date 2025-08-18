@@ -1,6 +1,10 @@
 import { describe, it, vi, expect } from "vitest";
 
-import { handleGetUserReviews, handlePostMessage } from "@/controllers/reviewController";
+import {
+  handleGetUserReviews,
+  handlePostMessage,
+  handleGetReviewById,
+} from "@/controllers/reviewController";
 import { reviewAndStoreRepo } from "@/services/reviewService";
 import { getReviewById, getReviewsByUserId } from "@/models/reviewModel";
 import { getUserIdBySub } from "@/models/userModel";
@@ -131,5 +135,53 @@ describe("handleGetUserReviews", () => {
 
     expect(res.status).toHaveBeenCalledWith(404);
     expect(res.json).toHaveBeenCalledWith({ error: "User not found" });
+  });
+});
+
+describe("handleGetReviewById", () => {
+  const mockRes = () => ({
+    status: vi.fn().mockReturnThis(),
+    json: vi.fn(),
+  });
+
+  it("should return review if found", async () => {
+    const req = { params: { id: "123" } };
+    const res = mockRes();
+
+    const mockReview = {
+      id: 123,
+      user_id: 1,
+      repo_id: 2,
+      score: 85,
+      created_at: new Date(),
+    };
+
+    (getReviewById as any).mockResolvedValue(mockReview);
+
+    await handleGetReviewById(req as any, res as any);
+
+    expect(res.json).toHaveBeenCalledWith(mockReview);
+  });
+
+  it("should return 400 if id is invalid", async () => {
+    const req = { params: { id: "notanumber" } };
+    const res = mockRes();
+
+    await handleGetReviewById(req as any, res as any);
+
+    expect(res.status).toHaveBeenCalledWith(400);
+    expect(res.json).toHaveBeenCalledWith({ error: "Invalid review ID" });
+  });
+
+  it("should return 404 if review not found", async () => {
+    const req = { params: { id: "999" } };
+    const res = mockRes();
+
+    (getReviewById as any).mockResolvedValue(null);
+
+    await handleGetReviewById(req as any, res as any);
+
+    expect(res.status).toHaveBeenCalledWith(404);
+    expect(res.json).toHaveBeenCalledWith({ error: "Review not found" });
   });
 });
