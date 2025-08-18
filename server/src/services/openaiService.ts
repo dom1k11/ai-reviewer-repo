@@ -10,7 +10,7 @@ export function createReviewRequest(code: string) {
     max_tokens: MAX_TOKENS,
   };
 }
-
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function parseReviewResponse(data: any): string {
   return data.choices?.[0]?.message?.content ?? "No Answer from OpenAI";
 }

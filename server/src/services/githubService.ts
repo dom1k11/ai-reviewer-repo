@@ -1,5 +1,4 @@
 import { githubRequest } from "@/clients/githubClient";
-import { parseRepoUrl } from "@/utils/getRepo";
 
 export async function getRepoTree(owner: string, repo: string, branch = "main") {
   try {

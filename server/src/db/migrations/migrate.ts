@@ -1,7 +1,8 @@
 import fs from "fs";
 import path from "path";
 import pg from "pg";
-require("dotenv").config();
+import dotenv from "dotenv";
+dotenv.config();
 
 const pool = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
