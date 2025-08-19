@@ -25,13 +25,30 @@ AI Reviewer Assistant automatically generates structured code reviews for GitHub
 
 ## ▶️ Getting Started
 
+# To run this application locally, you must configure the following:
+
+- ✅ Auth0 (authentication)
+- ✅ GitHub token (repo access)
+- ✅ OpenAI API key (code review generation)
+- ✅ PostgreSQL database
+
+Without these, the app won’t function properly — mock mode is not fully supported yet.
+
+However, if you just want to test the basic functionality, I suggest skipping this part and dive into the code
+
 ```bash
 git clone https://github.com/TuringCollegeSubmissions/dsedus-WD2.3.4.5.git
 npm install
+configure server/.env (see .env.example)
+1. cd server
+npm run dev
+2. cd client
 npm run dev
 ```
 
 ## 📁 Project Structure
+
+### Server
 
 ```
 server/
@@ -41,6 +58,13 @@ server/
     models/            → Database access
     middleware/        → Auth & validation
     clients/           → External API clients (OpenAI, GitHub)
-    utils/             → Helpers (parsers, formatters)
-    config/            → Configuration and constants
+    utils/
+```
+
+### Client
+
+```
+client/
+  src/ in development
+
 ```
