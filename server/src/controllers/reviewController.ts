@@ -20,12 +20,12 @@ export async function handlePostMessage(req: Request, res: Response) {
 
 export async function handleGetUserReviews(req: Request, res: Response) {
   try {
-    // const sub = req.auth?.payload.sub; //TODO: change to real sub
-    const mockSub = "auth0|689a2d6015b77d3add7f353e";
+    const sub = req.auth?.payload.sub;
+    // const mockSub = "auth0|689a2d6015b77d3add7f353e";
 
-    if (!mockSub) return res.status(401).json({ error: "Unauthorized" });
+    if (!sub) return res.status(401).json({ error: "Unauthorized" });
 
-    const userId = await getUserIdBySub(mockSub);
+    const userId = await getUserIdBySub(sub);
     if (!userId) return res.status(404).json({ error: "User not found" });
 
     const reviews = await getReviewsByUserId(userId.id);
