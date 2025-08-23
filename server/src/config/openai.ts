@@ -1,9 +1,10 @@
 import dotenv from "dotenv";
 dotenv.config();
 export const API_KEY = process.env.OPENAI_API_KEY;
-if (!API_KEY) {
+if (process.env.NODE_ENV !== "test" && !API_KEY) {
   throw new Error("❌ OPENAI_API_KEY is not defined in .env");
 }
+
 export const USER_PROMPT = (code: string) => `Please review the following code:\n\n${code}`;
 export const MODEL = "gpt-4o";
 export const SYSTEM_PROMPT = `
