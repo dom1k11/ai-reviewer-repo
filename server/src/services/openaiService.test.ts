@@ -1,4 +1,12 @@
 import { describe, it, expect } from "vitest";
+vi.mock("@/config/openai", () => ({
+  MODEL: "fake-model",
+  SYSTEM_PROMPT: "fake system prompt",
+  USER_PROMPT: (c: string) => `fake ${c}`,
+  MAX_TOKENS: 100,
+  API_KEY: "fake",
+}));
+
 import { createReviewRequest } from "@/services/openaiService";
 import { MODEL, SYSTEM_PROMPT, USER_PROMPT, MAX_TOKENS } from "@/config/openai";
 import { extractScoreFromReview } from "@/services/openaiService";
@@ -6,6 +14,7 @@ import { parseReviewResponse } from "@/services/openaiService";
 import { vi } from "vitest";
 import * as openaiClient from "@/clients/openaiClient";
 import { generateReview } from "@/services/openaiService";
+
 describe("createReviewRequest", () => {
   it("should create a valid request object", () => {
     const code = "const x = 5;";
