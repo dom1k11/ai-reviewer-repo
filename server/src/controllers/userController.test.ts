@@ -116,3 +116,17 @@ describe("handleGetUser", () => {
     expect(res.json).toHaveBeenCalledWith({ error: "Server error" });
   });
 });
+import { getAverageScore } from "@/models/userModel";
+import pool from "@/db"; 
+
+describe("getAverageScore", () => {
+  it.only("should return average score of selected user", async () => {
+    vi.spyOn(pool, "query").mockResolvedValueOnce({
+      rows: [{ avg: 99 }],
+    } as any);
+
+    const result = await getAverageScore(1);
+    console.log(result);
+    expect(result).toBe(99);
+  });
+});

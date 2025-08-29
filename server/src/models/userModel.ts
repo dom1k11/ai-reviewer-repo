@@ -27,3 +27,11 @@ export async function getUserIdBySub(auth0Id: string): Promise<UserId | null> {
   const result = await pool.query("SELECT id FROM users WHERE auth0_id = $1", [auth0Id]);
   return result.rows[0] ?? null;
 }
+
+export async function getAverageScore(userId: number) {
+  const result = await pool.query("SELECT AVG(score) AS avg FROM reviews WHERE user_id = $1", [
+    userId,
+  ]);
+  console.log("gotten average score", result.rows[0].avg)
+  return result.rows[0].avg;
+}
