@@ -47,7 +47,7 @@ export async function handleGetUser(req: Request, res: Response): Promise<void> 
 }
 
 import { getUserIdBySub } from "@/models/userModel";
-export async function handleGetAverageScore(req: Request, res: Response) {
+export async function handleGetAverageScore(_req: Request, res: Response) {
   // const sub = req.auth?.payload.sub;
   const sub = "auth0|689a2d6015b77d3add7f353e";
 

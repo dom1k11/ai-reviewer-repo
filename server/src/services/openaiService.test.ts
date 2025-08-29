@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, afterEach } from "vitest";
 
 import { createReviewRequest } from "@/services/openaiService";
 import { MODEL, SYSTEM_PROMPT, USER_PROMPT, MAX_TOKENS } from "@/config/openai";

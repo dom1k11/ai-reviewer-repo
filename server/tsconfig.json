@@ -9,13 +9,12 @@
     "strict": true,
     "skipLibCheck": true,
     "baseUrl": "./src",
-    "noUnusedLocals": true,  
-    "noUnusedParameters": true, 
-    "strictNullChecks": true, 
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "strictNullChecks": true,
     "noImplicitAny": true,
     "paths": {
-      "@/*": ["*"],
-      
+      "@/*": ["*"]
     }
   },
   "include": ["./src"],

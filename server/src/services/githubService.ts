@@ -1,21 +1,18 @@
 import { githubRequest } from "@/clients/githubClient";
 
-export async function getRepoTree(owner: string, repo: string, branch = "main") {
-  try {
-    console.log("📁 [getRepoTree] owner:", owner, "repo:", repo, "branch:", branch);
+export async function getRepoTree(
+  owner: string,
+  repo: string,
+  branch = "main"
+): Promise<{ tree: { path: string; type: string; sha: string }[] }> {
+  const request = await githubRequest("GET /repos/{owner}/{repo}/git/trees/{tree_sha}", {
+    owner,
+    repo,
+    tree_sha: branch,
+    recursive: "1",
+  });
 
-    const request = await githubRequest("GET /repos/{owner}/{repo}/git/trees/{tree_sha}", {
-      owner,
-      repo,
-      tree_sha: branch,
-      recursive: "1",
-    });
-
-    return request;
-  } catch (err) {
-    console.error("❌ Failed to fetch repo tree:", err);
-    throw new Error("Failed to fetch repo tree");
-  }
+  return request as { tree: { path: string; type: string; sha: string }[] };
 }
 
 type GitHubBlobResponse = { content?: string };
@@ -52,13 +49,13 @@ export async function filterExts(owner: string, repo: string) {
 
     return tree
       .filter(
-        (file) =>
+        (file: { path: string; type: string; sha: string }) =>
           file.type === "blob" &&
           ALLOWED_EXTS.some((ext) => file.path.endsWith(ext)) &&
           !file.path.includes("node_modules") &&
           !file.path.startsWith(".")
       )
-      .map((file) => ({
+      .map((file: { path: string; type: string; sha: string }) => ({
         sha: file.sha,
         path: file.path,
       }));

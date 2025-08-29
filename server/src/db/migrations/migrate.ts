@@ -21,7 +21,7 @@ async function runMigrations() {
     try {
       await pool.query(sql);
     } catch (err) {
-      console.error(`❌ Failed on ${file}:`, err.message);
+      console.error(`❌ Failed on ${file}:`, err instanceof Error ? err.message : String(err));
       process.exit(1);
     }
   }

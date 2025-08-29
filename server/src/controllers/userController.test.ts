@@ -5,7 +5,7 @@ import { describe, it, vi, expect } from "vitest";
 describe("syncUserWithDatabase", () => {
   it("should call findOrCreateUser and return the user", async () => {
     const mockUser = { id: 1, email: "test@example.com", nickname: "Test" };
-    vi.spyOn(userModel, "findOrCreateUser").mockResolvedValue(mockUser);
+    vi.spyOn(userModel, "findOrCreateUser").mockResolvedValue(mockUser as Partial<User> as User);
 
     const req = {
       auth: {
@@ -18,7 +18,7 @@ describe("syncUserWithDatabase", () => {
     };
     const res = { json: vi.fn() };
 
-    await syncUserWithDatabase(req, res);
+    await syncUserWithDatabase(req as any, res as any);
 
     expect(userModel.findOrCreateUser).toHaveBeenCalledWith(
       "auth0|123",
@@ -42,7 +42,7 @@ describe("syncUserWithDatabase", () => {
     };
     const res = { json: vi.fn(), status: vi.fn().mockReturnThis() };
 
-    await syncUserWithDatabase(req, res);
+    await syncUserWithDatabase(req as any, res as any);
 
     expect(res.status).toHaveBeenCalledWith(500);
     expect(res.json).toHaveBeenCalledWith({ error: "Server error" });
@@ -52,7 +52,7 @@ describe("syncUserWithDatabase", () => {
 describe("handleGetUser", () => {
   it("should return user when found", async () => {
     const mockUser = { auth0_id: "auth0|123", email: "test@example.com", nickname: "Test" };
-    vi.spyOn(userModel, "getUserBySub").mockResolvedValue(mockUser);
+    vi.spyOn(userModel, "getUserBySub").mockResolvedValue(mockUser as Partial<User> as User);
 
     const req = {
       auth: {
@@ -77,7 +77,7 @@ describe("handleGetUser", () => {
       nickname: "Test",
     };
 
-    vi.spyOn(userModel, "getUserBySub").mockResolvedValue(mockUser);
+    vi.spyOn(userModel, "getUserBySub").mockResolvedValue(mockUser as Partial<User> as User);
 
     const req = {
       auth: {
@@ -92,7 +92,7 @@ describe("handleGetUser", () => {
       status: vi.fn().mockReturnThis(),
     };
 
-    await handleGetUser(req, res);
+    await handleGetUser(req as any, res as any);
 
     expect(res.json).toHaveBeenCalledWith(mockUser);
   });
@@ -118,6 +118,7 @@ describe("handleGetUser", () => {
 });
 import { handleGetAverageScore } from "./userController";
 import pool from "@/db";
+import { User } from "@/types/user";
 
 describe("handleGetAverageScore", () => {
   it("should return average score of selected user", async () => {
