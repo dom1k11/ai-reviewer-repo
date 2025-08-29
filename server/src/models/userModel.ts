@@ -32,6 +32,6 @@ export async function getAverageScore(userId: number) {
   const result = await pool.query("SELECT AVG(score) AS avg FROM reviews WHERE user_id = $1", [
     userId,
   ]);
-  console.log("gotten average score", result.rows[0].avg)
+  console.log("gotten average score", result.rows[0].avg);
   return result.rows[0].avg;
 }
