@@ -34,7 +34,7 @@ AI Reviewer Assistant automatically generates structured code reviews for GitHub
 
 > **Note:** Without these, the app won’t function properly — mock mode is not fully supported yet.
 
-> **Note:** However, if you just want to test the basic functionality, I suggest skipping this part and dive into the code
+> However, if you just want to test the basic functionality, I suggest skipping this part and dive into the code
 
 ```bash
 git clone https://github.com/TuringCollegeSubmissions/dsedus-WD2.3.4.5.git
@@ -45,6 +45,8 @@ npm run dev
 2. cd client
 npm run dev
 ```
+
+> Check out the `server/endpoints.guide.md`
 
 ## 📁 Project Structure
 

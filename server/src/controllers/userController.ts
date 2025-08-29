@@ -1,7 +1,7 @@
 import { findOrCreateUser, getAverageScore, getUserBySub } from "@/models/userModel";
 import type { Request, Response } from "express";
 import type { User } from "@/types/user";
-import { AuthPayload } from "@/models/authPayload";
+import { AuthPayload } from "@/types/authPayload";
 
 export async function syncUserWithDatabase(req: Request, res: Response): Promise<void> {
   try {
@@ -58,7 +58,7 @@ export async function handleGetAverageScore(req: Request, res: Response) {
   try {
     const averageScore = await getAverageScore(user);
     console.log(averageScore);
-    return res.json({ averageScore })
+    return res.json({ averageScore });
   } catch (err) {
     console.error("Error getting average score", err);
     res.status(500).json({ error: "Server error" });

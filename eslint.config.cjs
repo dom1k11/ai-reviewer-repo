@@ -5,6 +5,9 @@ const vuePlugin = require("eslint-plugin-vue");
 
 module.exports = [
   {
+    rules: {
+      "prettier/prettier": 0,
+    },
     files: ["**/*.vue"],
     languageOptions: {
       parser: require("vue-eslint-parser"),

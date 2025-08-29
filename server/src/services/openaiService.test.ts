@@ -8,7 +8,6 @@ import { vi } from "vitest";
 import * as openaiClient from "@/clients/openaiClient";
 import { generateReview } from "@/services/openaiService";
 
-
 describe("createReviewRequest", () => {
   it("should create a valid request object", () => {
     const code = "const x = 5;";
