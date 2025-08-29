@@ -1,7 +1,6 @@
 import express from "express";
 import cors from "cors";
 
-import pingRouter from "@/routes/ping";
 import reviewRouter from "@/routes/reviews";
 import userRoute from "@/routes/users";
 
@@ -17,7 +16,6 @@ app.use(
 
 app.use(express.json());
 
-app.use("/", pingRouter);
 app.use("/review", reviewRouter);
 app.use("/me", userRoute);
 

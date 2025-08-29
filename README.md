@@ -32,9 +32,9 @@ AI Reviewer Assistant automatically generates structured code reviews for GitHub
 - ✅ OpenAI API key (code review generation)
 - ✅ PostgreSQL database
 
-Without these, the app won’t function properly — mock mode is not fully supported yet.
+> **Note:** Without these, the app won’t function properly — mock mode is not fully supported yet.
 
-However, if you just want to test the basic functionality, I suggest skipping this part and dive into the code
+> **Note:** However, if you just want to test the basic functionality, I suggest skipping this part and dive into the code
 
 ```bash
 git clone https://github.com/TuringCollegeSubmissions/dsedus-WD2.3.4.5.git
