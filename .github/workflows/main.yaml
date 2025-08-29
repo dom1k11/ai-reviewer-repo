@@ -33,6 +33,7 @@ jobs:
 
       - name: Type checking
         run: npm run check-types
+        working-directory: server
 
       - name: Run tests
         run: npm run test
