@@ -120,7 +120,7 @@ import { handleGetAverageScore } from "./userController";
 import pool from "@/db";
 
 describe("handleGetAverageScore", () => {
-  it.only("should return average score of selected user", async () => {
+  it("should return average score of selected user", async () => {
     const req = {};
 
     const res = { json: vi.fn(), status: vi.fn().mockReturnThis() };
