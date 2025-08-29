@@ -24,7 +24,6 @@ jobs:
 
       - name: Install deps
         run: npm ci
-        working-directory: server
 
       - name: Prettier format check
         run: npm run format:check
