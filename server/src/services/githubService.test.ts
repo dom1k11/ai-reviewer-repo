@@ -30,7 +30,7 @@ describe("getRepoTree", () => {
   });
 
   it("should throw and error if service is failed", async () => {
-    (githubRequest as Mock).mockRejectedValueOnce(new Error("Not Found"));
+    (githubRequest as Mock).mockRejectedValueOnce(new Error("Failed to fetch repo tree"));
 
     await expect(getRepoTree("dom1k11", "code-template")).rejects.toThrow(
       "Failed to fetch repo tree"
