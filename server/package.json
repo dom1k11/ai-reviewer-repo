@@ -9,7 +9,6 @@
     "create-migration": "node src/db/create-migration.js",
     "migrate": "tsx src/db/migrations/migrate.ts",
     "check-types": "tsc --noEmit"
-
   },
   "keywords": [],
   "author": "",
