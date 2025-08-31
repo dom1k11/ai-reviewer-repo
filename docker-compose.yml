@@ -1,13 +1,22 @@
-version: '3'
+version: "3"
 services:
   server:
-    build: ./
+    build: ./server
     ports:
       - "3000:3000"
     environment:
-        - DATABASE_URL=postgresql://postgres:3124@db:5432/ai-reviewer
+      - DATABASE_URL=postgresql://postgres:3124@db:5432/ai-reviewer
     depends_on:
       - db
+  client:
+    build: ./client
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_URL=http://server:3000
+    depends_on:
+      - server
+
   db:
     image: postgres:latest
     environment:
