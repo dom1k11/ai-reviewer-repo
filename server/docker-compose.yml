@@ -1,0 +1,22 @@
+version: '3'
+services:
+  server:
+    build: ./
+    ports:
+      - "3000:3000"
+    environment:
+        - DATABASE_URL=postgresql://postgres:3124@db:5432/ai-reviewer
+    depends_on:
+      - db
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_PASSWORD: 3124
+      POSTGRES_DB: ai-reviewer
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres-data:

@@ -62,4 +62,4 @@ Returns a single review by its ID.
 
 ### Request
 
-GET /api/reviews/42
+GET /review/42
