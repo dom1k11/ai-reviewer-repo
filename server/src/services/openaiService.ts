@@ -14,11 +14,11 @@ export function createReviewRequest(code: string) {
 export function parseReviewResponse(data: any): string {
   return data.choices?.[0]?.message?.content ?? "No Answer from OpenAI";
 }
-
+import { mockReview } from "./reviewMock";
 export async function generateReview(code: string) {
-  if (process.env.USE_MOCK_AI === "false") {
+  if (process.env.USE_MOCK_AI === "true") {
     console.log("⚠️ Using mock AI");
-    return `Mock review for: ${code}`;
+    return mockReview;
   }
   const request = createReviewRequest(code);
   const data = await callOpenAI(request);

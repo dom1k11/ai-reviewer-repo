@@ -25,11 +25,11 @@ export function useAuth() {
     loading.value = true;
     try {
       const token = await getAccessTokenSilently();
-      const data = await fetchMeService(token);
-      const userData = await getUser(token);
-      console.log("actual user", userData);
-      profile.value = data;
-      console.log(`${data.auth0_id}: User logged in`);
+      const Auth0UserData = await fetchMeService(token); // syncs data between auth0 and db
+      const userData = await getUser(token); //gets an actual data of user
+      profile.value = userData;
+      console.log("profile", profile.value);
+      console.log(`${Auth0UserData.auth0_id}: User logged in`);
     } catch (err) {
       console.error(err);
     } finally {

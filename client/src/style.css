@@ -1,8 +1,20 @@
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #1d1c1c;
+  --color-main: #ffffff;
+  --color-bg: #e6ebe7;
+  --color-text: #1e1e1e;
+  --color-primary: #42b983;
+  --color-primary-hover: #429b40;
+  --color-border: #dddddd;
+  --color-accent: #ff4081;
+  --color-error: #d32f2f;
+  --button-raiseY: translateY(-2px);
+  --button-hover-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.18), 0 1.5px 6px rgba(0, 0, 0, 0.12);
+  --font-body: "Inter", sans-serif;
+  --font-heading: "Inter", serif;
+  --font-button: "Georgia", monospace;
 }
 
 button {
