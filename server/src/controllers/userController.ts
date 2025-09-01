@@ -27,6 +27,7 @@ export async function syncUserWithDatabase(req: Request, res: Response): Promise
 export async function handleGetUser(req: Request, res: Response): Promise<void> {
   try {
     const sub = (req.auth?.payload as { sub?: string })?.sub;
+    console.log(sub)
 
     if (!sub) {
       res.status(401).json({ error: "Unauthorized" });

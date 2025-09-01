@@ -10,7 +10,7 @@ import { createUserSchema, getUserSchema } from "@/controllers/validators/userVa
 const router = Router();
 
 router.post("/", checkJwt, validateAuthPayload(createUserSchema), syncUserWithDatabase);
-router.get("/user", validateAuthPayload(getUserSchema), checkJwt, handleGetUser);
+router.get("/user", checkJwt, validateAuthPayload(getUserSchema), handleGetUser);
 router.get("/average", handleGetAverageScore);
 
 export default router;
