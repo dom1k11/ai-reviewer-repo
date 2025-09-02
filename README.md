@@ -2,6 +2,12 @@
 
 AI Reviewer Assistant automatically generates structured code reviews for GitHub repositories using OpenAI.
 
+- [Features](#Features)
+- [Setup](#setup)
+- [Authentication](#authentication)
+- [Project Structure](#project-structure)
+- [API Endpoints](#api-endpoints)
+
 ## 🚀 Features
 
 - Parses GitHub repository content via GitHub API
@@ -48,7 +54,7 @@ npm run dev
 
 > Check out the `server/endpoints.guide.md`
 
-## 📁 Project Structure
+# 📁 Project Structure
 
 ### Server
 
