@@ -3,6 +3,11 @@
 
 AI Reviewer Assistant automatically generates structured code reviews for GitHub repositories using OpenAI.
 
+> ## ⚠️ IMPORTANT NOTE
+> ### While waiting for the code review, some features were expanded and improved. Because of this, certain parts of the application now depend on external services (like Auth0) that causes it difficult to mock specific endpoints or workflows locally.
+---
+
+
 ## 📑 Table of Contents
 - [Features](#features)
 - [Stack](#stack)
@@ -71,9 +76,6 @@ cd client
 npm run dev
 ```
 
-> Check out the [`server/endpoints.guide.md`](server/endpoints.guide.md)
-
----
 
 ## Project Structure
 
