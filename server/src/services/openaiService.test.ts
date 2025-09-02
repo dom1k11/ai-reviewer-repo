@@ -60,6 +60,7 @@ describe("extractScoreFromReview", () => {
     expect(extractScoreFromReview(text)).toBe(75);
   });
 });
+import { mockReview } from "./reviewMock";
 
 describe("generateReview", () => {
   const originalEnv = process.env.USE_MOCK_AI;
@@ -71,10 +72,10 @@ describe("generateReview", () => {
   it("should call OpenAI if USE_MOCK_AI is true", async () => {
     process.env.USE_MOCK_AI = "true";
     vi.spyOn(openaiClient, "callOpenAI").mockResolvedValueOnce({
-      choices: [{ message: { content: "Nice!" } }],
+      choices: [{ message: { content: mockReview } }],
     });
 
     const result = await generateReview("code");
-    expect(result).toBe("Nice!");
+    expect(result).toBe(mockReview);
   });
 });

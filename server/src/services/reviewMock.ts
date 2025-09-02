@@ -41,4 +41,4 @@ Make use of environment variables for API keys instead of hardcoding them in the
 Provide a demo or deployment link so reviewers can try the application without setting it up locally.
 
 Conclusion
-Overall, the project works at a very basic level but lacks polish. With proper restructuring, attention to best practices, and stronger error handling, it could become a much more professional and maintainable codebase. For now, it demonstrates effort and learning progress, but it should not be considered production-ready.`
+Overall, the project works at a very basic level but lacks polish. With proper restructuring, attention to best practices, and stronger error handling, it could become a much more professional and maintainable codebase. For now, it demonstrates effort and learning progress, but it should not be considered production-ready.`;
