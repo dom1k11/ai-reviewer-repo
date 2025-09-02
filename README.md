@@ -3,12 +3,13 @@
 AI Reviewer Assistant automatically generates structured code reviews for GitHub repositories using OpenAI.
 
 ## 📑 Table of Contents
-- [Features](#-features)
-- [Stack](#-stack)
-- [Getting Started](#-getting-started)
-- [Project Structure](#-project-structure)
+- [Features](#features)
+- [Stack](#stack)
+- [Getting Started](#getting-started)
+- [Project Structure](#project-structure)
 - [Authentication](#authentication)
 - [API Endpoints](#api-endpoints)
+
 
 ---
 
