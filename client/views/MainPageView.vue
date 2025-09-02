@@ -1,34 +1,15 @@
 <script setup lang="ts">
-import { ref, computed } from "vue";
 import { useAuth } from "../src/composables/useAuth";
+import { useReview } from "../src/composables/useReview";
+import MainSection from "../src/components/MainSection.vue";
 
-const { login, handleLogout, user, isAuthenticated, profile, fetchMe, getToken } = useAuth();
+const { login, handleLogout, profile, getToken } = useAuth();
+const { parsedResponse, formattedReview, sendRequest } = useReview();
 
-const response = ref("");
-const parsedResponse = ref<{ review: string; score: number } | null>(null);
-
-async function sendRequest() {
+async function handleSend(repoUrl: string) {
   const token = await getToken();
-
-  const res = await fetch("http://localhost:3000/review", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-    body: JSON.stringify({
-      repoUrl: "https://github.com/dom1k11/code-template",
-    }),
-  });
-
-  const data = await res.json();
-  response.value = JSON.stringify(data, null, 2);
-  parsedResponse.value = data;
+  await sendRequest(token, repoUrl);
 }
-
-const formattedReview = computed(() =>
-  parsedResponse.value ? parsedResponse.value.review.replace(/\n/g, "<br>") : ""
-);
 </script>
 
 <template>
@@ -39,19 +20,7 @@ const formattedReview = computed(() =>
   </header>
 
   <div class="main-box">
-    <main>
-      <h1>Put your github link here and get the code review!</h1>
-      <input class="form-control" type="text" placeholder="Default input" />
-      <button @click="sendRequest">Get review</button>
-      <ul>
-        <li>Mock project reqirement</li>
-        <li>Mock project description</li>
-        <li>Mock project reqirement</li>
-        <li>Mock project description</li>
-        <li>Mock project reqirement</li>
-        <li>Mock project description</li>
-      </ul>
-    </main>
+    <MainSection @send-request="handleSend" />
 
     <aside>
       <h2>Review Result:</h2>
