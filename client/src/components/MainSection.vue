@@ -33,9 +33,7 @@ const repoUrl = ref("https://github.com/dom1k11/code-template");
 main {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  flex: 2;
+  padding: 1.5rem;
   box-shadow: var(--shadow);
   width: 50%;
 }

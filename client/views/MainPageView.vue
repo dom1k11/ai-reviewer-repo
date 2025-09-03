@@ -2,6 +2,7 @@
 import { useAuth } from "../src/composables/useAuth";
 import { useReview } from "../src/composables/useReview";
 import MainSection from "../src/components/MainSection.vue";
+import ReviewSection from "../src/components/reviewSection.vue";
 
 const { login, handleLogout, profile, getToken } = useAuth();
 const { parsedResponse, formattedReview, sendRequest } = useReview();
@@ -21,14 +22,7 @@ async function handleSend(repoUrl: string) {
 
   <div class="main-box">
     <MainSection @send-request="handleSend" />
-
-    <aside>
-      <h2>Review Result:</h2>
-      <section v-if="parsedResponse" class="review">
-        <p><strong>Score:</strong> {{ parsedResponse.score }}</p>
-        <div v-html="formattedReview"></div>
-      </section>
-    </aside>
+    <ReviewSection></ReviewSection>
   </div>
 </template>
 
@@ -45,9 +39,7 @@ button:hover {
   background-color: var(--color-primary-hover);
   box-shadow: var(--button-hover-shadow);
 }
-.form-control {
-  width: 50%;
-}
+
 .user-name {
   margin: 20px;
   color: white;
@@ -71,32 +63,7 @@ header {
   padding: 2rem;
   background: var(--color-main);
 }
-main {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  flex: 2;
-  box-shadow: var(--shadow);
-  width: 50%;
-}
-aside {
-  background: var(--color-bg);
-  width: 50%;
-  padding: 1.5rem;
-  box-shadow: var(--shadow);
-  overflow: auto;
-  max-height: 80vh;
-}
-.review {
-  margin-top: 30px;
-  padding: 20px;
-  max-width: 600px;
-  align-items: center;
-  justify-content: center;
-  text-align: left;
-  line-height: 1.5;
-}
+
 @media (max-width: 768px) {
   .main-box {
     flex-direction: column;
@@ -108,12 +75,6 @@ aside {
     margin-top: 0;
     flex: none;
     width: 100%;
-  }
-
-  aside {
-    width: 100%;
-    margin-top: 1rem;
-    max-height: none;
   }
 }
 </style>
