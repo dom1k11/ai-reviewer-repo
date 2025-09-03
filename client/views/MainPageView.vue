@@ -2,7 +2,8 @@
 import { useAuth } from "../src/composables/useAuth";
 import { useReview } from "../src/composables/useReview";
 import MainSection from "../src/components/MainSection.vue";
-import ReviewSection from "../src/components/reviewSection.vue";
+import ReviewSection from "../src/components/ReviewSection.vue";
+import Header from "../src/components/MainHeader.vue";
 
 const { login, handleLogout, profile, getToken } = useAuth();
 const { parsedResponse, formattedReview, sendRequest } = useReview();
@@ -14,11 +15,8 @@ async function handleSend(repoUrl: string) {
 </script>
 
 <template>
-  <header>
-    <div class="user-name">{{ profile ? "Welcome, " + profile.nickname : "" }}</div>
-    <button @click="login">Log in</button>
-    <button @click="handleLogout">Log out</button>
-  </header>
+  <Header></Header>
+ 
 
   <div class="main-box">
     <MainSection @send-request="handleSend" />
@@ -44,13 +42,7 @@ button:hover {
   margin: 20px;
   color: white;
 }
-header {
-  display: flex;
-  justify-content: end;
-  align-items: center;
-  background-color: rgb(20, 20, 20);
-  padding: 20px;
-}
+
 
 .main-box {
   display: flex;
