@@ -1,15 +1,14 @@
 ## 📑 Table of Contents
 
-* [Users Endpoints](#users-endpoints)
+- [Users Endpoints](#users-endpoints)
+  - [POST /me – Create or Sync User](#post-me--create-or-sync-user)
+  - [GET /user – Get User by Auth0 ID](#get-user--get-user-by-auth0-id)
+  - [GET /average – Get Average Review Score](#get-average--get-average-review-score)
 
-  * [POST /me – Create or Sync User](#post-me--create-or-sync-user)
-  * [GET /user – Get User by Auth0 ID](#get-user--get-user-by-auth0-id)
-  * [GET /average – Get Average Review Score](#get-average--get-average-review-score)
-* [Review Endpoints](#review-endpoints)
-
-  * [POST /review – Create a Review](#post-review--create-a-review)
-  * [GET /review – Get All Reviews for Current User](#get-review--get-all-reviews-for-current-user)
-  * [GET /\:id – Get Review by ID](#get-id--get-review-by-id)
+- [Review Endpoints](#review-endpoints)
+  - [POST /review – Create a Review](#post-review--create-a-review)
+  - [GET /review – Get All Reviews for Current User](#get-review--get-all-reviews-for-current-user)
+  - [GET /\:id – Get Review by ID](#get-id--get-review-by-id)
 
 ---
 
@@ -35,9 +34,9 @@ Yes (Bearer Token)
 
 | Field      | Type   | Required | Description                          |
 | ---------- | ------ | -------- | ------------------------------------ |
-| `auth0_id` | string | ✅        | Unique identifier from Auth0 (`sub`) |
-| `email`    | string | ✅        | User’s email address                 |
-| `nickname` | string | ✅        | User’s display name or nickname      |
+| `auth0_id` | string | ✅       | Unique identifier from Auth0 (`sub`) |
+| `email`    | string | ✅       | User’s email address                 |
+| `nickname` | string | ✅       | User’s display name or nickname      |
 
 #### 📤 Response – 200 OK
 
@@ -135,7 +134,7 @@ Yes
 
 | Field     | Type   | Required | Description                            |
 | --------- | ------ | -------- | -------------------------------------- |
-| `repoUrl` | string | ✅        | Public GitHub repository URL to review |
+| `repoUrl` | string | ✅       | Public GitHub repository URL to review |
 
 #### 📤 Response – 200 OK
 

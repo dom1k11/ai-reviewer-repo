@@ -1,14 +1,15 @@
-
 # 🧠 AI Reviewer Assistant
 
 AI Reviewer Assistant automatically generates structured code reviews for GitHub repositories using OpenAI.
 
 > ## ⚠️ IMPORTANT NOTE
+>
 > ### While waiting for the code review, some features were expanded and improved. Because of this, certain parts of the application now depend on external services (like Auth0) that causes it difficult to mock specific endpoints or workflows locally.
+
 ---
 
-
 ## 📑 Table of Contents
+
 - [Features](#features)
 - [Stack](#stack)
 - [Getting Started](#getting-started)
@@ -62,7 +63,7 @@ To run this application locally, you must configure the following:
 ```bash
 git clone https://github.com/TuringCollegeSubmissions/dsedus-WD2.3.4.5.git
 npm install
-````
+```
 
 ### Run
 
@@ -76,7 +77,6 @@ npm run dev
 cd client
 npm run dev
 ```
-
 
 ## Project Structure
 
@@ -104,9 +104,9 @@ client/
 
 ## 🔑 Authentication
 
-* Implemented with **Auth0**
-* JWT required for protected routes
-* Backend validates tokens before allowing access
+- Implemented with **Auth0**
+- JWT required for protected routes
+- Backend validates tokens before allowing access
 
 ---
 
@@ -118,9 +118,9 @@ client/
 
 The project includes **unit tests** for controllers and services using [Vitest](https://vitest.dev/).
 
-* **Unit tests** focus on small, isolated parts of the system (controllers, services).
-* They use mocks for external dependencies (database, Auth0, OpenAI) to keep tests fast and deterministic.
-* Coverage reports can be generated with:
+- **Unit tests** focus on small, isolated parts of the system (controllers, services).
+- They use mocks for external dependencies (database, Auth0, OpenAI) to keep tests fast and deterministic.
+- Coverage reports can be generated with:
 
   ```bash
   npm run test:coverage
@@ -133,11 +133,10 @@ The project includes **unit tests** for controllers and services using [Vitest](
 
 ### Future Improvements (TODO)
 
-* Add **integration tests** with [supertest](https://github.com/ladjs/supertest) to simulate real HTTP requests.
-* Run integration tests against a **real Postgres instance** (in-memory).
+- Add **integration tests** with [supertest](https://github.com/ladjs/supertest) to simulate real HTTP requests.
+- Run integration tests against a **real Postgres instance** (in-memory).
 
 ---
-
 
 ## 📡 API Endpoints
 
