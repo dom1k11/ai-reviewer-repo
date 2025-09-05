@@ -122,7 +122,13 @@ import { User } from "@/types/user";
 
 describe("handleGetAverageScore", () => {
   it("should return average score of selected user", async () => {
-    const req = {};
+    const req = {
+      auth: {
+        payload: {
+          sub: "auth0|123",
+        },
+      },
+    };
 
     const res = { json: vi.fn(), status: vi.fn().mockReturnThis() };
 

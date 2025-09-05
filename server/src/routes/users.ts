@@ -11,6 +11,6 @@ const router = Router();
 
 router.post("/", checkJwt, validateAuthPayload(createUserSchema), syncUserWithDatabase);
 router.get("/user", checkJwt, validateAuthPayload(getUserSchema), handleGetUser);
-router.get("/average", handleGetAverageScore);
+router.get("/average", checkJwt, handleGetAverageScore); //TODO: Call on frontend
 
 export default router;

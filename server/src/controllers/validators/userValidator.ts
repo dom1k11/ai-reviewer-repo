@@ -1,9 +1,8 @@
 import { z } from "zod";
-
+import { AUTH0_CLAIMS } from "@/constants/auth0Claims";
 export const createUserSchema = z.object({
-  sub: z.string(),
-  "https://ai-reviewer.com/email": z.string().email(),
-  "https://ai-reviewer.com/nickname": z.string(),
+  [AUTH0_CLAIMS.EMAIL]: z.string().email(),
+  [AUTH0_CLAIMS.NICKNAME]: z.string(),
 });
 
 export const getUserSchema = z.object({
