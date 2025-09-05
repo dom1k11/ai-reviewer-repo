@@ -14,6 +14,7 @@ AI Reviewer Assistant automatically generates structured code reviews for GitHub
 - [Getting Started](#getting-started)
 - [Project Structure](#project-structure)
 - [Authentication](#authentication)
+- [Tests](#tests)
 - [API Endpoints](#api-endpoints)
 
 ---
@@ -108,6 +109,35 @@ client/
 * Backend validates tokens before allowing access
 
 ---
+
+🔥 Отличная идея. Давай я помогу тебе оформить кусок документации про тесты так, чтобы это выглядело осознанно и по-взрослому.
+
+---
+
+## 🧪 Tests
+
+The project includes **unit tests** for controllers and services using [Vitest](https://vitest.dev/).
+
+* **Unit tests** focus on small, isolated parts of the system (controllers, services).
+* They use mocks for external dependencies (database, Auth0, OpenAI) to keep tests fast and deterministic.
+* Coverage reports can be generated with:
+
+  ```bash
+  npm run test:coverage
+  ```
+
+### Current Limitations
+
+> Currently tests rely heavily on mocks, so they don’t provide full end-to-end confidence.
+> They ensure that controllers call the right services and return the expected responses, but do not guarantee that the full system (Express app + Postgres + Auth0) works together.
+
+### Future Improvements (TODO)
+
+* Add **integration tests** with [supertest](https://github.com/ladjs/supertest) to simulate real HTTP requests.
+* Run integration tests against a **real Postgres instance** (in-memory).
+
+---
+
 
 ## 📡 API Endpoints
 
