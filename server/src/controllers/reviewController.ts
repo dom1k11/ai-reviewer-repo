@@ -1,4 +1,3 @@
-import { Response, Request } from "express";
 import { reviewAndStoreRepo } from "@/services/reviewService";
 import { getUserIdBySub } from "@/models/userModel";
 import { getReviewById, getReviewsByUserId } from "@/models/reviewModel";

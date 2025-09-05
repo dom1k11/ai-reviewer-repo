@@ -45,7 +45,7 @@ describe("syncUserWithDatabase", () => {
     await syncUserWithDatabase(req as any, res as any);
 
     expect(res.status).toHaveBeenCalledWith(500);
-    expect(res.json).toHaveBeenCalledWith({ error: "Server error" });
+    expect(res.json).toHaveBeenCalledWith({ error: "Internal Server Error" });
   });
 });
 
@@ -113,7 +113,7 @@ describe("handleGetUser", () => {
     await handleGetUser(req as any, res as any);
 
     expect(res.status).toHaveBeenCalledWith(500);
-    expect(res.json).toHaveBeenCalledWith({ error: "Server error" });
+    expect(res.json).toHaveBeenCalledWith({ error: "Internal Server Error" });
   });
 });
 import { handleGetAverageScore } from "./userController";
