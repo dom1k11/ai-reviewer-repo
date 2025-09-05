@@ -7,8 +7,10 @@
     "test": "vitest",
     "test:coverage": "vitest run --coverage",
     "create-migration": "node src/db/create-migration.js",
-    "migrate": "tsx src/db/migrations/migrate.ts",
-    "check-types": "tsc --noEmit"
+    "migrate": "node dist/db/migrations/migrate.js",
+    "check-types": "tsc --noEmit",
+    "build": "tsc",
+    "start": "node dist/index.js"
   },
   "keywords": [],
   "author": "",

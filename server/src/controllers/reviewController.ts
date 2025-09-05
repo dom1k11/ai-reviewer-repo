@@ -2,52 +2,55 @@ import { Response, Request } from "express";
 import { reviewAndStoreRepo } from "@/services/reviewService";
 import { getUserIdBySub } from "@/models/userModel";
 import { getReviewById, getReviewsByUserId } from "@/models/reviewModel";
-export async function handlePostMessage(req: Request, res: Response) {
-  try {
-    const sub = req.auth?.payload?.sub;
-    if (!sub) return res.status(401).json({ error: "Unauthorized" });
-    const { repoUrl } = req.body;
-    if (!repoUrl) return res.status(400).json({ error: "repoUrl required" });
-
-    const result = await reviewAndStoreRepo({ sub, repoUrl });
-
-    res.status(201).json(result);
-  } catch (err) {
-    console.error("💥 POST /messages:", err);
-    res.status(500).json({ error: "Internal Server Error" });
+import { controller } from "@/utils/controllerWrapper";
+export const handlePostMessage = controller(async (req, res) => {
+  const sub = req.auth?.payload?.sub;
+  if (!sub) {
+    res.status(401).json({ error: "Unauthorized" });
+    return;
   }
-}
 
-export async function handleGetUserReviews(req: Request, res: Response) {
-  try {
-    const sub = req.auth?.payload.sub;
-    // const mockSub = "auth0|689a2d6015b77d3add7f353e";
-
-    if (!sub) return res.status(401).json({ error: "Unauthorized" });
-
-    const userId = await getUserIdBySub(sub);
-    if (!userId) return res.status(404).json({ error: "User not found" });
-
-    const reviews = await getReviewsByUserId(userId.id);
-    res.json(reviews);
-    console.log(reviews);
-  } catch (err) {
-    console.error("💥 GET /review:", err);
-    res.status(500).json({ error: "Server error" });
+  const { repoUrl } = req.body;
+  if (!repoUrl) {
+    res.status(400).json({ error: "repoUrl required" });
+    return;
   }
-}
 
-export async function handleGetReviewById(req: Request, res: Response) {
-  try {
-    const reviewId = Number(req.params.id);
-    if (isNaN(reviewId)) return res.status(400).json({ error: "Invalid review ID" });
+  const result = await reviewAndStoreRepo({ sub, repoUrl });
+  res.status(201).json(result);
+}, "handlePostMessage");
 
-    const review = await getReviewById(reviewId);
-    if (!review) return res.status(404).json({ error: "Review not found" });
+export const handleGetUserReviews = controller(async (req, res) => {
+  const sub = req.auth?.payload.sub;
 
-    res.json(review);
-  } catch (err) {
-    console.error("💥 GET /review/:id", err);
-    res.status(500).json({ error: "Server error" });
+  if (!sub) {
+    res.status(401).json({ error: "Unauthorized" });
+    return;
   }
-}
+
+  const userId = await getUserIdBySub(sub);
+  if (!userId) {
+    res.status(404).json({ error: "User not found" });
+    return;
+  }
+
+  const reviews = await getReviewsByUserId(userId.id);
+  res.json(reviews);
+  console.log(reviews);
+}, "handleGetUserReviews");
+
+export const handleGetReviewById = controller(async (req, res) => {
+  const reviewId = Number(req.params.id);
+  if (isNaN(reviewId)) {
+    res.status(400).json({ error: "Invalid review ID" });
+    return;
+  }
+
+  const review = await getReviewById(reviewId);
+  if (!review) {
+    res.status(404).json({ error: "Review not found" });
+    return;
+  }
+
+  res.json(review);
+}, "handleGetReviewById");
