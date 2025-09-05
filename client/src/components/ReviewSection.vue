@@ -16,34 +16,25 @@ const { parsedResponse, formattedReview } = useReview();
 
 <style scoped>
 aside {
-  background: var(--color-bg);
-  width: 50%;
+  flex: 1;
   padding: 1.5rem;
   box-shadow: var(--shadow);
-  overflow: auto;
+  overflow-y: auto;
   max-height: 80vh;
+  width: 60%;
 }
+
 .review {
-  margin-top: 30px;
-  padding: 20px;
-  max-width: 600px;
-  align-items: center;
-  justify-content: center;
+  margin-top: 1.5rem;
+  padding: 1rem;
   text-align: left;
   line-height: 1.5;
 }
 
-aside {
-  width: 100%;
-  margin-top: 1rem;
-  max-height: none;
-}
-
 @media (max-width: 768px) {
-  main {
-    margin-top: 0;
-    flex: none;
+  aside {
     width: 100%;
+    max-height: none;
   }
 }
 </style>

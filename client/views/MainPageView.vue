@@ -4,6 +4,7 @@ import { useReview } from "../src/composables/useReview";
 import MainSection from "../src/components/MainSection.vue";
 import ReviewSection from "../src/components/ReviewSection.vue";
 import Header from "../src/components/MainHeader.vue";
+import ProjectRequirements from "../src/components/ProjectRequirements.vue";
 
 const { login, handleLogout, profile, getToken } = useAuth();
 const { parsedResponse, formattedReview, sendRequest } = useReview();
@@ -16,11 +17,12 @@ async function handleSend(repoUrl: string) {
 
 <template>
   <Header></Header>
- 
 
   <div class="main-box">
-    <MainSection @send-request="handleSend" />
-    <ReviewSection></ReviewSection>
+    <MainSection @send-request="handleSend">
+      <ProjectRequirements />
+    </MainSection>
+    <ReviewSection />
   </div>
 </template>
 
@@ -31,29 +33,23 @@ button {
   color: white;
   cursor: pointer;
   transition: all 0.2s ease;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
 }
+
 button:hover {
   transform: var(--button-raiseY);
   background-color: var(--color-primary-hover);
   box-shadow: var(--button-hover-shadow);
 }
 
-.user-name {
-  margin: 20px;
-  color: white;
-}
-
-
 .main-box {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
-  margin: 2rem auto;
-  box-sizing: border-box;
-  border-radius: 20px;
+  justify-content: space-between;
   gap: 2rem;
   padding: 2rem;
-  background: var(--color-main);
+  width: 100%;
 }
 
 @media (max-width: 768px) {
@@ -61,12 +57,7 @@ button:hover {
     flex-direction: column;
     width: 100%;
     padding: 1rem;
-  }
-
-  main {
-    margin-top: 0;
-    flex: none;
-    width: 100%;
+    gap: 1rem;
   }
 }
 </style>

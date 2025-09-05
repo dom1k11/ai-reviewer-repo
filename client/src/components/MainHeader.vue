@@ -16,12 +16,17 @@ function toggleDropdown() {
       {{ profile ? "Welcome, " + profile.nickname : "" }}
     </div>
 
-    <div class="dropdown">
+    <div class="desktop-buttons">
+      <button v-if="!profile" @click="login">Log in</button>
+      <button v-else @click="handleLogout">Log out</button>
+    </div>
+
+    <div class="dropdown mobile-only">
       <button @click="toggleDropdown">☰ Menu</button>
 
       <div class="dropdown-menu" v-if="dropdownOpen">
-        <button @click="login">Log in</button>
-        <button @click="handleLogout">Log out</button>
+        <button v-if="!profile" @click="login">Log in</button>
+        <button v-else @click="handleLogout">Log out</button>
       </div>
     </div>
   </header>
@@ -41,6 +46,20 @@ header {
   color: white;
   font-size: 1.2rem;
   font-weight: 500;
+}
+
+.desktop-buttons button {
+  background-color: var(--color-primary, #4a90e2);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  margin-left: 0.5rem;
+}
+
+.desktop-buttons button:hover {
+  background-color: var(--color-primary-hover, #357ab8);
 }
 
 .dropdown {
@@ -83,16 +102,20 @@ header {
   background-color: rgba(255, 255, 255, 0.1);
 }
 
-@media (max-width: 768px) {
-  header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-  }
+.desktop-buttons {
+  display: flex;
+}
 
-  .dropdown-menu {
-    right: auto;
-    left: 0;
+.mobile-only {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .desktop-buttons {
+    display: none;
+  }
+  .mobile-only {
+    display: block;
   }
 }
 </style>

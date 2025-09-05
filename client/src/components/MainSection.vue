@@ -19,23 +19,24 @@ const repoUrl = ref("https://github.com/dom1k11/code-template");
       placeholder="https://github.com/user/repo"
     />
     <button @click="emit('send-request', repoUrl)">Get review</button>
-
-    <ul>
-      <li>Ensure that your code is on main branch</li>
-      <li>Ensure that your repository is public</li>
-      <li>Mock project requirement</li>
-      <li>Mock project description</li>
-    </ul>
+    <slot />
   </main>
 </template>
 
 <style scoped>
 main {
   display: flex;
+  align-items: center;
   flex-direction: column;
   padding: 1.5rem;
   box-shadow: var(--shadow);
-  width: 50%;
+  width: 40%;
+  min-width: 300px;
+  margin: 0 auto;
+}
+
+input {
+  margin: 1rem;
 }
 
 button {
@@ -44,7 +45,12 @@ button {
   color: white;
   cursor: pointer;
   transition: all 0.2s ease;
+  width: 50%;
+  height: 3rem;
+  font-size: 1rem;
+  margin: 1.5rem;
 }
+
 button:hover {
   transform: var(--button-raiseY);
   background-color: var(--color-primary-hover);
