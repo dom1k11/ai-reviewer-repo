@@ -11,6 +11,7 @@ export const syncUserWithDatabase = controller(async (req, res) => {
     [AUTH0_CLAIMS.EMAIL]: email,
     [AUTH0_CLAIMS.NICKNAME]: nickname,
   } = (req.auth?.payload ?? {}) as AuthPayload;
+  console.log(sub, email, nickname);
 
   if (!sub || !email || !nickname) {
     res.status(400).json({ error: "Missing user claims" });
@@ -23,7 +24,6 @@ export const syncUserWithDatabase = controller(async (req, res) => {
 
 export const handleGetUser = controller(async (req, res) => {
   const sub = (req.auth?.payload as { sub?: string })?.sub;
-  console.log(sub);
 
   if (!sub) {
     res.status(401).json({ error: "Unauthorized" });

@@ -35,7 +35,6 @@ export const handleGetUserReviews = controller(async (req, res) => {
 
   const reviews = await getReviewsByUserId(userId.id);
   res.json(reviews);
-  console.log(reviews);
 }, "handleGetUserReviews");
 
 export const handleGetReviewById = controller(async (req, res) => {

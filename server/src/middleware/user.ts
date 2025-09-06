@@ -2,8 +2,6 @@ import { ZodSchema } from "zod";
 import { Request, Response, NextFunction } from "express";
 export function validateAuthPayload(schema: ZodSchema) {
   return (req: Request, res: Response, next: NextFunction) => {
-    console.log("🟦 Incoming Auth Payload:", req.auth?.payload);
-
     const parsed = schema.safeParse(req.auth?.payload);
 
     if (!parsed.success) {
