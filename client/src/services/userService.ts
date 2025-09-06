@@ -8,6 +8,6 @@ export function getUser(token: string) {
   return apiRequest("GET", "/me/user", token);
 }
 
-export function getAverage(token: string) {
+export function getAverageScore(token: string) {
   return apiRequest("GET", "/me/average", token);
 }

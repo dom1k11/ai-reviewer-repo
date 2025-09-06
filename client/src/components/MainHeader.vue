@@ -14,6 +14,7 @@ function toggleDropdown() {
   <header>
     <div class="user-name">
       {{ profile ? "Welcome, " + profile.nickname : "" }}
+      <span v-if="profile"> - Your average score: {{ profile.averageScore ?? "N/A" }}</span>
     </div>
 
     <div class="desktop-buttons">
