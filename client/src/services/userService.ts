@@ -1,27 +1,13 @@
-export async function fetchMe(token: string) {
-  const res = await fetch("http://localhost:3000/me", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-  });
+import { apiRequest } from "../utils/api";
 
-  if (!res.ok) throw new Error(`Failed: ${res.status}`);
-
-  return res.json();
+export function fetchMe(token: string) {
+  return apiRequest("POST", "/me", token);
 }
 
-export async function getUser(token: string) {
-  const res = await fetch("http://localhost:3000/me/user", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-  });
+export function getUser(token: string) {
+  return apiRequest("GET", "/me/user", token);
+}
 
-  if (!res.ok) throw new Error(`Failed: ${res.status}`);
-
-  return res.json();
+export function getAverage(token: string) {
+  return apiRequest("GET", "/me/average", token);
 }
