@@ -11,7 +11,7 @@ import { checkJwt } from "@/middleware/auth0";
 const router = Router();
 
 router.post("/", checkJwt, validateBody(PostURLSchema), handlePostMessage);
-router.get("/", checkJwt, handleGetUserReviews);
-router.get("/:id", checkJwt, handleGetReviewById);
+router.get("/", checkJwt, handleGetUserReviews); //Add validation 
+router.get("/:id", checkJwt, handleGetReviewById); //Add Validation
 
 export default router;

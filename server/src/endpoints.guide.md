@@ -8,7 +8,7 @@
 - [Review Endpoints](#review-endpoints)
   - [POST /review – Create a Review](#post-review--create-a-review)
   - [GET /review – Get All Reviews for Current User](#get-review--get-all-reviews-for-current-user)
-  - [GET /\:id – Get Review by ID](#get-id--get-review-by-id)
+  - [GET /review/:id – Get Review by ID](#get-id--get-review-by-id)
 
 ---
 
@@ -168,16 +168,18 @@ GET /review
 ```json
 [
   {
-    "id": 42,
-    "score": 4,
-    "review": "...",
+    "id": 1,
+    "user_id": 1,
+    "repo_id": 1,
+    "score": 100,
     "created_at": "2025-09-02T15:35:22.456Z"
   },
   {
-    "id": 43,
-    "score": 5,
-    "review": "...",
-    "created_at": "2025-09-01T13:15:00.789Z"
+    "id": 2,
+    "user_id": 2,
+    "repo_id": 2,
+    "score": 50,
+    "created_at": "2025-09-02T15:35:22.456Z"
   }
 ]
 ```
@@ -201,12 +203,13 @@ GET /review/42
 #### 📤 Response – 200 OK
 
 ```json
-{
-  "id": 42,
-  "score": 4,
-  "review": "Code looks clean...",
-  "created_at": "2025-09-02T15:35:22.456Z"
-}
+ {
+    "id": 1,
+    "user_id": 1,
+    "repo_id": 1,
+    "score": 100,
+    "created_at": "2025-09-02T15:35:22.456Z"
+  },
 ```
 
 #### ⚠️ Possible Errors
