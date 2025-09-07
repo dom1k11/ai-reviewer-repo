@@ -1,6 +1,6 @@
 // src/composables/useReview.ts
 import { ref, computed } from "vue";
-
+import { Review } from "@/types/review";
 const response = ref("");
 const parsedResponse = ref<{ review: string; score: number } | null>(null);
 
@@ -23,7 +23,7 @@ const formattedReview = computed(() =>
   parsedResponse.value?.review ? parsedResponse.value.review.replace(/\n/g, "<br>") : ""
 );
 
-const userReviews = ref<Array<{ id: number; user_id: number; repo_id: number; score: number }>>([]);
+const userReviews = ref<Review[]>([]);
 
 async function fetchUserReviews(token: string) {
   const res = await fetch("http://localhost:3000/review", {

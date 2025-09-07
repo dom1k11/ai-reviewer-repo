@@ -20,7 +20,8 @@ onMounted(async () => {
     <h2>User Reviews</h2>
     <ul v-if="userReviews.length">
       <li v-for="review in userReviews" :key="review.id">
-       Id: {{ review.id }} Repository id {{ review.repo_id }} - Score: {{ review.score }}
+        Id: {{ review.id }} | Repository id: {{ review.repo_id }} | Score: {{ review.score }} |
+        {{ review.created_at }}
       </li>
     </ul>
     <p v-else>No reviews yet</p>
