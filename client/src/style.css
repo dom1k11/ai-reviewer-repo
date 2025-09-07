@@ -1,30 +1,38 @@
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   color-scheme: light dark;
+
+  /* 🎨 Basic colors */
   --color-main: #ffffff;
   --color-bg: #e6ebe7;
   --color-text: #1e1e1e;
+
+  /* 🎯 Accents */
   --color-primary: #42b983;
   --color-primary-hover: #429b40;
-  --color-border: #dddddd;
   --color-accent: #ff4081;
   --color-error: #d32f2f;
+
+  /* ⚙️ Secondary*/
+  --color-secondary: #6c757d;
+  --color-success: #4caf50;
+  --color-warning: #ff9800;
+  --color-info: #2196f3;
+  --color-surface: #f9f9f9;
+
+  /* 🖼️ UI */
+  --color-border: #dddddd;
+  --overlay-bg: rgba(0, 0, 0, 0.5);
+
+  /* ✨ Effects */
   --button-raiseY: translateY(-2px);
-  --button-hover-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  --shadow: 0 8px 24px rgba(0, 0, 0, 0.18), 0 1.5px 6px rgba(0, 0, 0, 0.12);
+  --button-hover-shadow: 0 4px 8px var(--shadow-color);
+  --shadow: 0 8px 24px var(--shadow-color), 0 1.5px 6px var(--shadow-light);
+  --shadow-color: rgba(0, 0, 0, 0.18);
+  --shadow-light: rgba(0, 0, 0, 0.12);
+
+  /* 🅰️ Fonts */
   --font-body: "Inter", sans-serif;
   --font-heading: "Inter", serif;
   --font-button: "Georgia", monospace;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
 }

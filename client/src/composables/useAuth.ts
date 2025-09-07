@@ -6,9 +6,16 @@ export function useAuth() {
   const { loginWithRedirect, logout, user, isAuthenticated, getAccessTokenSilently } = useAuth0();
   const profile = ref(null);
   const loading = ref(false);
+  const login = () =>
+    loginWithRedirect({
+      appState: { targetUrl: "/app" },
+    });
 
-  const login = () => loginWithRedirect();
-  const handleLogout = () => logout({ logoutParams: { returnTo: window.location.origin } });
+  const handleLogout = () =>
+  logout({
+    logoutParams: { returnTo: window.location.origin + "/app" },
+  });
+
 
   async function getToken() {
     return await getAccessTokenSilently();
