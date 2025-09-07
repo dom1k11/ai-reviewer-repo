@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useAuth } from "../composables/useAuth";
-
+import { RouterLink } from "vue-router";
 const { login, handleLogout, profile } = useAuth();
 const dropdownOpen = ref(false);
 
@@ -15,6 +15,8 @@ function toggleDropdown() {
     <div class="user-name">
       {{ profile ? "Welcome, " + profile.nickname : "" }}
       <span v-if="profile"> - Your average score: {{ profile.averageScore ?? "N/A" }}</span>
+            <RouterLink to="/stats"><button>Stats</button></RouterLink>
+
     </div>
 
     <div class="desktop-buttons">
@@ -34,6 +36,16 @@ function toggleDropdown() {
 </template>
 
 <style scoped>
+button,
+.nav-button {
+  background-color: var(--color-primary, #4a90e2);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  margin-left: 0.5rem;
+}
 header {
   display: flex;
   justify-content: space-between;
