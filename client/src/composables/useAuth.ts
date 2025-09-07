@@ -31,7 +31,7 @@ export function useAuth() {
 
       profile.value = {
         ...userData,
-averageScore: Math.round(Number(averageReviewScore.averageScore)),
+        averageScore: Math.round(Number(averageReviewScore.averageScore)),
       };
       console.log("profile", profile.value);
       console.log(`${Auth0UserData.auth0_id}: User logged in`);

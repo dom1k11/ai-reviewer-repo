@@ -23,6 +23,23 @@ const formattedReview = computed(() =>
   parsedResponse.value?.review ? parsedResponse.value.review.replace(/\n/g, "<br>") : ""
 );
 
+const userReviews = ref<Array<{ id: number; user_id: number; repo_id: number; score: number }>>([]);
+
+async function fetchUserReviews(token: string) {
+  const res = await fetch("http://localhost:3000/review", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch user reviews");
+  }
+
+  const data = await res.json();
+  userReviews.value = data;
+}
+
 export function useReview() {
-  return { response, parsedResponse, formattedReview, sendRequest };
+  return { response, parsedResponse, formattedReview, userReviews, sendRequest, fetchUserReviews };
 }
