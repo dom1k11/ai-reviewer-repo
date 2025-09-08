@@ -36,3 +36,22 @@
   --font-heading: "Inter", serif;
   --font-button: "Georgia", monospace;
 }
+
+button {
+  background-color: var(--color-primary);
+  color: var(--color-main);
+  font-family: var(--font-button);
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  box-shadow: var(--shadow);
+}
+
+button:hover {
+  background-color: var(--color-primary-hover);
+  transform: var(--button-raiseY);
+  box-shadow: var(--button-hover-shadow);
+}
+
