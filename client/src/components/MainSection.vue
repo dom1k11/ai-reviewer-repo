@@ -38,22 +38,4 @@ main {
 input {
   margin: 1rem;
 }
-
-button {
-  background: var(--color-primary);
-  border-radius: 8px;
-  color: white;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  width: 50%;
-  height: 3rem;
-  font-size: 1rem;
-  margin: 1.5rem;
-}
-
-button:hover {
-  transform: var(--button-raiseY);
-  background-color: var(--color-primary-hover);
-  box-shadow: var(--button-hover-shadow);
-}
 </style>

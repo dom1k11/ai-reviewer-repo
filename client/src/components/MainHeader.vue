@@ -13,13 +13,14 @@ function toggleDropdown() {
 <template>
   <header>
     <div class="user-name">
+        <RouterLink to="/"><button>Main Page</button></RouterLink>
       {{ profile ? "Welcome, " + profile.nickname : "" }}
       <span v-if="profile"> - Your average score: {{ profile.averageScore ?? "N/A" }}</span>
-      <RouterLink to="/"><button>Main Page</button></RouterLink>
-      <RouterLink to="/stats"><button>Stats</button></RouterLink>
     </div>
 
     <div class="desktop-buttons">
+    
+      <RouterLink to="/stats"><button>Stats</button></RouterLink>
       <button v-if="!profile" @click="login">Log in</button>
       <button v-else @click="handleLogout">Log out</button>
     </div>
@@ -28,6 +29,8 @@ function toggleDropdown() {
       <button @click="toggleDropdown">☰ Menu</button>
 
       <div class="dropdown-menu" v-if="dropdownOpen">
+        <RouterLink to="/"><button>Main Page</button></RouterLink>
+        <RouterLink to="/stats"><button>Stats</button></RouterLink>
         <button v-if="!profile" @click="login">Log in</button>
         <button v-else @click="handleLogout">Log out</button>
       </div>
@@ -36,16 +39,6 @@ function toggleDropdown() {
 </template>
 
 <style scoped>
-button,
-.nav-button {
-  background-color: var(--color-primary, #4a90e2);
-  color: white;
-  border: none;
-  border-radius: 6px;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  margin-left: 0.5rem;
-}
 header {
   display: flex;
   justify-content: space-between;
@@ -61,33 +54,6 @@ header {
   font-weight: 500;
 }
 
-.desktop-buttons button {
-  background-color: var(--color-primary, #4a90e2);
-  color: white;
-  border: none;
-  border-radius: 6px;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  margin-left: 0.5rem;
-}
-
-.desktop-buttons button:hover {
-  background-color: var(--color-primary-hover, #357ab8);
-}
-
-.dropdown {
-  position: relative;
-}
-
-.dropdown > button {
-  background-color: var(--color-primary, #4a90e2);
-  color: white;
-  border: none;
-  border-radius: 6px;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-}
-
 .dropdown-menu {
   position: absolute;
   right: 0;
@@ -99,20 +65,6 @@ header {
   padding: 0.5rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   z-index: 10;
-}
-
-.dropdown-menu button {
-  background-color: transparent;
-  border: none;
-  color: white;
-  text-align: left;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-
-.dropdown-menu button:hover {
-  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .desktop-buttons {

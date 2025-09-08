@@ -27,27 +27,11 @@ async function handleSend(repoUrl: string) {
 </template>
 
 <style scoped>
-button {
-  background: var(--color-primary);
-  border-radius: 8px;
-  color: white;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  padding: 0.6rem 1.2rem;
-  font-size: 1rem;
-}
-
-button:hover {
-  transform: var(--button-raiseY);
-  background-color: var(--color-primary-hover);
-  box-shadow: var(--button-hover-shadow);
-}
-
 .main-box {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  gap: 2rem;
+  gap: 1rem;
   padding: 2rem;
   width: 100%;
 }

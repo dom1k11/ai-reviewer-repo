@@ -20,13 +20,15 @@ onMounted(() => {
       <p class="subtitle">Get structured code review from AI</p>
       <RouterLink to="/app">
         <button class="start-btn">Get started</button>
-        <button>Hello</button>
       </RouterLink>
     </div>
   </main>
 </template>
 
 <style scoped>
+button {
+  width: 300px;
+}
 .welcome {
   display: flex;
   align-items: center;
