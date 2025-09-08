@@ -5,7 +5,7 @@ const { parsedResponse, formattedReview } = useReview();
 </script>
 
 <template>
-  <aside>
+  <aside id="review-container">
     <h2>Review Result:</h2>
     <section v-if="parsedResponse" class="review">
       <p><strong>Project Score:</strong> {{ parsedResponse.score }}</p>

@@ -13,12 +13,13 @@ const repoUrl = ref("https://github.com/dom1k11/code-template");
   <main>
     <h1>Put your github link here and get the code review!</h1>
     <input
+      id="repo-input"
       v-model="repoUrl"
       class="form-control"
       type="text"
       placeholder="https://github.com/user/repo"
     />
-    <button @click="emit('send-request', repoUrl)">Get review</button>
+    <button id="get-review-btn"@click="emit('send-request', repoUrl)">Get review</button>
     <slot />
   </main>
 </template>

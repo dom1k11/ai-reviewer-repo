@@ -5,14 +5,19 @@ import MainSection from "../src/components/MainSection.vue";
 import ReviewSection from "../src/components/ReviewSection.vue";
 import Header from "../src/components/MainHeader.vue";
 import ProjectRequirements from "../src/components/ProjectRequirements.vue";
-
-const { login, handleLogout, profile, getToken } = useAuth();
-const { parsedResponse, formattedReview, sendRequest } = useReview();
-
+import { onMounted } from "vue";
+import { useOnboarding } from "../src/composables/useOnboarding";
+const { getToken } = useAuth();
+const { sendRequest } = useReview();
+const { startOnboarding } = useOnboarding();
 async function handleSend(repoUrl: string) {
   const token = await getToken();
   await sendRequest(token, repoUrl);
 }
+
+onMounted(() => {
+  startOnboarding();
+});
 </script>
 
 <template>

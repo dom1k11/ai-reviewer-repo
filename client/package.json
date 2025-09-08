@@ -11,6 +11,7 @@
   "dependencies": {
     "@auth0/auth0-vue": "^2.4.0",
     "bootstrap": "^5.3.8",
+    "intro.js": "^8.3.2",
     "vitest": "^3.2.4",
     "vue": "^3.5.18",
     "vue-router": "^4.5.1"
