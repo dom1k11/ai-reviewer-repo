@@ -1,20 +1,53 @@
 <script setup lang="ts">
 import { useReview } from "../composables/useReview";
+import { useAuth } from "../composables/useAuth";
 
 const { parsedResponse, formattedReview } = useReview();
+const { login, handleLogout, profile } = useAuth();
 </script>
-
 <template>
   <aside id="review-container">
-    <h2>Review Result:</h2>
-    <section v-if="parsedResponse" class="review">
-      <p><strong>Project Score:</strong> {{ parsedResponse.score }}</p>
-      <div v-html="formattedReview"></div>
-    </section>
+    <template v-if="!profile">
+      <div class="logged-out-msg-wrapper">
+        <p>Please log in to see the review result.</p>
+        <button @click="login">Log in to get review</button>
+      </div>
+    </template>
+
+    <template v-else-if="!parsedResponse">
+      <div class="logged-msg-wrapper">
+        <p class="loggged-in-msg">You are logged in. Submit a repo to get a review.</p>
+      </div>
+    </template>
+
+    <template v-else>
+      <h2>Review Result:</h2>
+      <section class="review">
+        <p><strong>Project Score:</strong> {{ parsedResponse.score }}</p>
+        <div v-html="formattedReview"></div>
+      </section>
+    </template>
   </aside>
 </template>
 
 <style scoped>
+.logged-msg-wrapper,
+.logged-out-msg-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  height: 100%;
+
+}
+
+h2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 aside {
   flex: 1;
   padding: 1.5rem;
@@ -27,7 +60,6 @@ aside {
 .review {
   margin-top: 1.5rem;
   padding: 1rem;
-  text-align: left;
   line-height: 1.5;
 }
 

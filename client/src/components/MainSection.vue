@@ -1,7 +1,9 @@
 <!-- src/components/MainSection.vue -->
 <script setup lang="ts">
 import { ref } from "vue";
+import { useAuth } from "../composables/useAuth";
 
+const { profile } = useAuth();
 const emit = defineEmits<{
   (e: "send-request", repoUrl: string): void;
 }>();
@@ -19,12 +21,20 @@ const repoUrl = ref("https://github.com/dom1k11/code-template");
       type="text"
       placeholder="https://github.com/user/repo"
     />
-    <button id="get-review-btn"@click="emit('send-request', repoUrl)">Get review</button>
+    <button id="get-review-btn" @click="emit('send-request', repoUrl)" :disabled="!profile">
+      Get review
+    </button>
     <slot />
   </main>
 </template>
 
 <style scoped>
+#get-review-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+
 main {
   display: flex;
   align-items: center;
