@@ -72,7 +72,6 @@ header {
   align-items: center;
 }
 .dropdown-menu button {
-  
   min-width: 150px;
   background: none;
   border: none;

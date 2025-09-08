@@ -19,7 +19,7 @@ export function useOnboarding() {
       intro.setOptions({
         steps: [
           {
-            intro: "Welcome! This is your habit tracker",
+            intro: `Welcome to quick intoduction!<br>`,
           },
           {
             element: document.querySelector("#repo-input") as HTMLElement | null,
