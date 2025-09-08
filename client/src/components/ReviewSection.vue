@@ -16,7 +16,8 @@ const { login, handleLogout, profile } = useAuth();
 
     <template v-else-if="!parsedResponse">
       <div class="logged-msg-wrapper">
-        <p class="loggged-in-msg">You are logged in. Submit a repo to get a review.</p>
+        <h2 class="loggged-in-msg">You are logged in.✅</h2>
+        <h2>Submit github repository to get a review. 📝</h2>
       </div>
     </template>
 
@@ -39,7 +40,6 @@ const { login, handleLogout, profile } = useAuth();
   text-align: center;
   flex-direction: column;
   height: 100%;
-
 }
 
 h2 {

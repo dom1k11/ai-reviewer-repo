@@ -29,11 +29,16 @@ const repoUrl = ref("https://github.com/dom1k11/code-template");
 </template>
 
 <style scoped>
+button {
+  width: 70%;
+  margin: 0 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 1.1rem;
+}
 #get-review-btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
-
 
 main {
   display: flex;

@@ -13,13 +13,13 @@ function toggleDropdown() {
 <template>
   <header>
     <div class="user-name">
-        <RouterLink to="/"><button>Main Page</button></RouterLink>
       {{ profile ? "Welcome, " + profile.nickname : "" }}
       <span v-if="profile"> - Your average score: {{ profile.averageScore ?? "N/A" }}</span>
     </div>
 
     <div class="desktop-buttons">
-    
+      <RouterLink to="/"><button>Main Page</button></RouterLink>
+
       <RouterLink to="/stats"><button>Stats</button></RouterLink>
       <button v-if="!profile" @click="login">Log in</button>
       <button v-else @click="handleLogout">Log out</button>
@@ -39,6 +39,9 @@ function toggleDropdown() {
 </template>
 
 <style scoped>
+button {
+  margin: 0 0.5rem 0 0.5rem;
+}
 header {
   display: flex;
   justify-content: space-between;
@@ -59,12 +62,25 @@ header {
   right: 0;
   top: 120%;
   display: flex;
+  justify-content: center;
   flex-direction: column;
   background-color: #333;
   border-radius: 6px;
   padding: 0.5rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   z-index: 10;
+  align-items: center;
+}
+.dropdown-menu button {
+  
+  min-width: 150px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  justify-content: center;
 }
 
 .desktop-buttons {
