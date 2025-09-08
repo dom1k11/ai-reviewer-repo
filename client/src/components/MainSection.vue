@@ -1,14 +1,22 @@
-<!-- src/components/MainSection.vue -->
 <script setup lang="ts">
 import { ref } from "vue";
 import { useAuth } from "../composables/useAuth";
+import { useValidation } from "../composables/useValidation";
 
 const { profile } = useAuth();
 const emit = defineEmits<{
   (e: "send-request", repoUrl: string): void;
 }>();
 
-const repoUrl = ref("");
+const repoUrl = ref("https://github.com/dom1k11/code-template");
+const { error, validateRepoUrl } = useValidation();
+
+function validateAndSend() {
+  const validUrl = validateRepoUrl(repoUrl.value);
+  if (validUrl) {
+    emit("send-request", validUrl);
+  }
+}
 </script>
 
 <template>
@@ -22,9 +30,9 @@ const repoUrl = ref("");
       type="text"
       placeholder="https://github.com/user/repo"
     />
-    <button id="get-review-btn" @click="emit('send-request', repoUrl)" :disabled="!profile">
-      Get review
-    </button>
+    <p v-if="error" class="error-msg">{{ error }}</p>
+
+    <button id="get-review-btn" @click="validateAndSend" :disabled="!profile">Get review</button>
     <slot />
   </main>
 </template>
@@ -47,12 +55,19 @@ input {
   transition:
     border 0.2s ease,
     box-shadow 0.2s ease;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.error-msg {
+  color: red;
+  font-size: 0.9rem;
+  margin: 0.25rem 0 0.75rem 0;
+  align-self: flex-start;
 }
 
 button {
   width: 70%;
-  margin: 0 0.5rem;
+  margin: 0.5rem 0;
   padding: 0.75rem 1.5rem;
   font-size: 1.1rem;
 }
