@@ -1,18 +1,26 @@
-<script setup lang="ts">
+<script setup lang="ts"></script>
 
-</script>
-
-<template><div class="spinner"></div></template>
+<template>
+  <div class="spinner-wrapper">
+    <div class="spinner"></div>
+  </div>
+</template>
 
 <style scoped>
+.spinner-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
 .spinner {
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   border: 4px solid #ccc;
   border-top-color: #42b883;
   border-radius: 50%;
   animation: spin 1s linear infinite;
-  margin: 20px auto;
 }
 
 @keyframes spin {

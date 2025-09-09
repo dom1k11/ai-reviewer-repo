@@ -16,18 +16,58 @@ onMounted(async () => {
 
 <template>
   <Header />
-  <div>
-    <h2>User Reviews</h2>
+  <div class="reviews-container">
+    <h2>Your reviews</h2>
 
     <Loader v-if="isLoading" />
 
-    <ul v-else-if="userReviews.length">
-      <li v-for="review in userReviews" :key="review.id">
-        Id: {{ review.id }} | Repository id: {{ review.repo_id }} | Score: {{ review.score }} |
-        {{ review.created_at }}
+    <ul v-else-if="userReviews.length" class="reviews-list">
+      <li v-for="review in userReviews" :key="review.id" class="review-card">
+        <p><strong>Id:</strong> {{ review.id }}</p>
+        <p><strong>Repository id:</strong> {{ review.repo_id }}</p>
+        <p><strong>Score:</strong> {{ review.score }}</p>
+        <p><strong>Date:</strong> {{ review.created_at }}</p>
       </li>
     </ul>
 
-    <p v-else>No reviews yet</p>
+    <p v-else class="empty-msg">No reviews yet</p>
   </div>
 </template>
+
+<style scoped>
+p {
+  padding: 0;
+  margin: 0;
+}
+.reviews-container {
+  padding: 0.5rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+h2 {
+  text-align: center;
+  margin: 1.5rem;
+}
+
+.reviews-list {
+  list-style: none;
+
+  display: grid;
+  gap: 1rem;
+}
+
+.review-card {
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: var(--shadow, 0 2px 6px rgba(0, 0, 0, 0.1));
+  background: #fff;
+  transition: transform 0.2s ease;
+}
+
+.empty-msg {
+  text-align: center;
+  font-style: italic;
+  color: #888;
+}
+</style>
