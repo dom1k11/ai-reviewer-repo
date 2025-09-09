@@ -18,7 +18,7 @@ function toggleDropdown() {
     </div>
 
     <div class="desktop-buttons">
-      <RouterLink to="/"><button>Main Page</button></RouterLink>
+      <RouterLink to="/app"><button>Main Page</button></RouterLink>
 
       <RouterLink to="/stats"><button>Stats</button></RouterLink>
       <button v-if="!profile" @click="login">Log in</button>
@@ -29,7 +29,7 @@ function toggleDropdown() {
       <button @click="toggleDropdown">☰ Menu</button>
 
       <div class="dropdown-menu" v-if="dropdownOpen">
-        <RouterLink to="/"><button>Main Page</button></RouterLink>
+        <RouterLink to="/app"><button>Main Page</button></RouterLink>
         <RouterLink to="/stats"><button>Stats</button></RouterLink>
         <button v-if="!profile" @click="login">Log in</button>
         <button v-else @click="handleLogout">Log out</button>
