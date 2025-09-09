@@ -1,28 +1,28 @@
 <script setup lang="ts">
+import { computed } from "vue";
 import { useReview } from "../composables/useReview";
 import { useAuth } from "../composables/useAuth";
 import Loader from "./Loader.vue";
 
-const { parsedResponse, formattedReview, isLoading } = useReview();
-const { login, handleLogout, profile } = useAuth();
+const { parsedResponse, formattedReview, isLoading: reviewLoading } = useReview();
+const { login, profile, isLoading: authLoading } = useAuth();
+
+const isLoading = computed(() => reviewLoading.value || authLoading.value);
 </script>
 
 <template>
   <aside id="review-container">
-    <!-- Пользователь не залогинен -->
-    <template v-if="!profile">
+    <template v-if="isLoading">
+      <Loader />
+    </template>
+
+    <template v-else-if="!profile">
       <div class="logged-out-msg-wrapper">
         <p>Please log in to see the review result.</p>
         <button @click="login">Log in to get review</button>
       </div>
     </template>
 
-    <!-- Идёт загрузка -->
-    <template v-else-if="isLoading">
-      <Loader />
-    </template>
-
-    <!-- Logged in, awaitiнн -->
     <template v-else-if="!parsedResponse">
       <div class="logged-msg-wrapper">
         <h2 class="loggged-in-msg">You are logged in.✅</h2>

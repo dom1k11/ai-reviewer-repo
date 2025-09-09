@@ -5,17 +5,16 @@ import { fetchMe as fetchMeService, getAverageScore, getUser } from "../services
 export function useAuth() {
   const { loginWithRedirect, logout, user, isAuthenticated, getAccessTokenSilently } = useAuth0();
   const profile = ref(null);
-  const loading = ref(false);
+  const isLoading = ref(false);
   const login = () =>
     loginWithRedirect({
       appState: { targetUrl: "/app" },
     });
 
   const handleLogout = () =>
-  logout({
-    logoutParams: { returnTo: window.location.origin + "/app" },
-  });
-
+    logout({
+      logoutParams: { returnTo: window.location.origin + "/app" },
+    });
 
   async function getToken() {
     return await getAccessTokenSilently();
@@ -29,7 +28,7 @@ export function useAuth() {
 
     console.log("User is logged in");
 
-    loading.value = true;
+    isLoading.value = true;
     try {
       const token = await getAccessTokenSilently();
       const Auth0UserData = await fetchMeService(token); // syncs data between auth0 and db
@@ -46,7 +45,7 @@ export function useAuth() {
     } catch (err) {
       console.error(err);
     } finally {
-      loading.value = false;
+      isLoading.value = false;
     }
   }
 
@@ -60,5 +59,5 @@ export function useAuth() {
     if (isAuthenticated.value) fetchMe();
   });
 
-  return { login, handleLogout, user, isAuthenticated, profile, loading, fetchMe, getToken };
+  return { login, handleLogout, user, isAuthenticated, profile, isLoading, fetchMe, getToken };
 }
