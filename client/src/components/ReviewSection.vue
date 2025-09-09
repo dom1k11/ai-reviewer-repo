@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import { useReview } from "../composables/useReview";
 import { useAuth } from "../composables/useAuth";
+import Loader from "./Loader.vue";
 
-const { parsedResponse, formattedReview } = useReview();
+const { parsedResponse, formattedReview, isLoading } = useReview();
 const { login, handleLogout, profile } = useAuth();
 </script>
+
 <template>
   <aside id="review-container">
+    <!-- Пользователь не залогинен -->
     <template v-if="!profile">
       <div class="logged-out-msg-wrapper">
         <p>Please log in to see the review result.</p>
@@ -14,6 +17,12 @@ const { login, handleLogout, profile } = useAuth();
       </div>
     </template>
 
+    <!-- Идёт загрузка -->
+    <template v-else-if="isLoading">
+      <Loader />
+    </template>
+
+    <!-- Logged in, awaitiнн -->
     <template v-else-if="!parsedResponse">
       <div class="logged-msg-wrapper">
         <h2 class="loggged-in-msg">You are logged in.✅</h2>
