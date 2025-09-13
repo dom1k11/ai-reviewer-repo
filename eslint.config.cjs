@@ -5,6 +5,15 @@ const vuePlugin = require("eslint-plugin-vue");
 
 module.exports = [
   {
+    ignores: [
+      "node_modules",
+      "dist",
+      "server/dist",
+      "client/dist",
+    ],
+  },
+
+  {
     rules: {
       "prettier/prettier": 0,
     },
