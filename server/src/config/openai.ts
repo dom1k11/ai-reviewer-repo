@@ -9,7 +9,7 @@ if (process.env.NODE_ENV !== "test" && !API_KEY) {
 }
 
 export const MODEL = process.env.OPENAI_MODEL;
-export const OPENAI_URL = process.env.OPENAI_URL;
+export const OPENAI_URL = process.env.OPENAI_URL!;
 export const MAX_TOKENS = Number(process.env.OPENAI_MAX_TOKENS);
 
 export const SYSTEM_PROMPT = fs.readFileSync(path.join(__dirname, "systemPrompt.md"), "utf-8");
