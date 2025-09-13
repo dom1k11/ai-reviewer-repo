@@ -107,6 +107,7 @@ client/
 - Implemented with **Auth0**
 - JWT required for protected routes
 - Backend validates tokens before allowing access
+
 ---
 
 ## 🧪 Tests

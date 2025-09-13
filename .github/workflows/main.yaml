@@ -25,6 +25,9 @@ jobs:
       - name: Install deps
         run: npm ci
 
+      - name: Run Prettier format
+        run: npm run format
+
       - name: Prettier format check
         run: npm run format:check
 
