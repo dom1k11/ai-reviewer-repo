@@ -28,5 +28,6 @@ Your goal: help the developer improve the code while keeping the review short, s
 `;
 //TODO : Put SYSTEM_PROMPT in separate .md file if the prompt become larger
 
+
 export const OPENAI_URL = "https://api.openai.com/v1/chat/completions";
 export const MAX_TOKENS = 512;

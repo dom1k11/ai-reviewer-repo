@@ -13,5 +13,4 @@ router.post("/", checkJwt, validateAuthPayload(createUserSchema), syncUserWithDa
 router.get("/user", checkJwt, validateAuthPayload(getUserSchema), handleGetUser);
 router.get("/average", checkJwt, handleGetAverageScore); //TODO: Add validation
 
-
 export default router;
