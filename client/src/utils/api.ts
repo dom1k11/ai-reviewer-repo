@@ -1,8 +1,8 @@
-export async function apiRequest<T = any>(
+export async function apiRequest<T = unknown>(
   method: "GET" | "POST" | "PUT" | "DELETE",
   endpoint: string,
   token: string,
-  body?: any
+  body?: Record<string, unknown>
 ): Promise<T> {
   const res = await fetch(`http://localhost:3000${endpoint}`, {
     method,
@@ -15,5 +15,5 @@ export async function apiRequest<T = any>(
 
   if (!res.ok) throw new Error(`Failed: ${res.status}`);
 
-  return res.json();
+  return res.json() as Promise<T>;
 }
