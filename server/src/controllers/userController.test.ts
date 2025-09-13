@@ -1,11 +1,19 @@
-import { syncUserWithDatabase, handleGetUser } from "./userController";
-import * as userModel from "@/models/userModel";
-import { describe, it, vi, expect } from "vitest";
+vi.mock("@/constants/auth0Claims", () => ({
+  AUTH0_CLAIMS: {
+    EMAIL: "https://ai-reviewer.com/email",
+    NICKNAME: "https://ai-reviewer.com/nickname",
+  },
+}));
 
-describe("syncUserWithDatabase", () => {
+import { describe, it, vi, expect } from "vitest";
+import { syncUserWithDatabase, handleGetUser, handleGetAverageScore } from "./userController";
+import * as userModel from "@/models/userModel";
+import pool from "@/db";
+
+describe("syncUserWithDatabase (mock user)", () => {
   it("should call findOrCreateUser and return the user", async () => {
     const mockUser = { id: 1, email: "test@example.com", nickname: "Test" };
-    vi.spyOn(userModel, "findOrCreateUser").mockResolvedValue(mockUser as Partial<User> as User);
+    vi.spyOn(userModel, "findOrCreateUser").mockResolvedValue(mockUser as any);
 
     const req = {
       auth: {
@@ -16,7 +24,8 @@ describe("syncUserWithDatabase", () => {
         },
       },
     };
-    const res = { json: vi.fn() };
+
+    const res = { status: vi.fn().mockReturnThis(), json: vi.fn() };
 
     await syncUserWithDatabase(req as any, res as any);
 
@@ -40,7 +49,7 @@ describe("syncUserWithDatabase", () => {
         },
       },
     };
-    const res = { json: vi.fn(), status: vi.fn().mockReturnThis() };
+    const res = { status: vi.fn().mockReturnThis(), json: vi.fn() };
 
     await syncUserWithDatabase(req as any, res as any);
 
@@ -52,45 +61,10 @@ describe("syncUserWithDatabase", () => {
 describe("handleGetUser", () => {
   it("should return user when found", async () => {
     const mockUser = { auth0_id: "auth0|123", email: "test@example.com", nickname: "Test" };
-    vi.spyOn(userModel, "getUserBySub").mockResolvedValue(mockUser as Partial<User> as User);
+    vi.spyOn(userModel, "getUserBySub").mockResolvedValue(mockUser as any);
 
-    const req = {
-      auth: {
-        payload: {
-          sub: "auth0|123",
-        },
-      },
-    };
-
+    const req = { auth: { payload: { sub: "auth0|123" } } };
     const res = { json: vi.fn(), status: vi.fn().mockReturnThis() };
-
-    await handleGetUser(req as any, res as any);
-
-    expect(res.json).toHaveBeenCalledWith(mockUser);
-    expect(res.status).not.toHaveBeenCalledWith(404);
-  });
-
-  it("should return the exact user object from getUserBySub", async () => {
-    const mockUser = {
-      auth0_id: "auth0|689b6e46a51b6e7534dd2455",
-      email: "test@example.com",
-      nickname: "Test",
-    };
-
-    vi.spyOn(userModel, "getUserBySub").mockResolvedValue(mockUser as Partial<User> as User);
-
-    const req = {
-      auth: {
-        payload: {
-          sub: "auth0|123",
-        },
-      },
-    };
-
-    const res = {
-      json: vi.fn(),
-      status: vi.fn().mockReturnThis(),
-    };
 
     await handleGetUser(req as any, res as any);
 
@@ -100,14 +74,7 @@ describe("handleGetUser", () => {
   it("should return 500 on error", async () => {
     vi.spyOn(userModel, "getUserBySub").mockRejectedValue(new Error("DB error"));
 
-    const req = {
-      auth: {
-        payload: {
-          sub: "auth0|123",
-        },
-      },
-    };
-
+    const req = { auth: { payload: { sub: "auth0|123" } } };
     const res = { json: vi.fn(), status: vi.fn().mockReturnThis() };
 
     await handleGetUser(req as any, res as any);
@@ -116,29 +83,17 @@ describe("handleGetUser", () => {
     expect(res.json).toHaveBeenCalledWith({ error: "Internal Server Error" });
   });
 });
-import { handleGetAverageScore } from "./userController";
-import pool from "@/db";
-import { User } from "@/types/user";
 
 describe("handleGetAverageScore", () => {
   it("should return average score of selected user", async () => {
-    const req = {
-      auth: {
-        payload: {
-          sub: "auth0|123",
-        },
-      },
-    };
-
+    const req = { auth: { payload: { sub: "auth0|123" } } };
     const res = { json: vi.fn(), status: vi.fn().mockReturnThis() };
 
     vi.spyOn(userModel, "getUserIdBySub").mockResolvedValue({ id: 1 });
-    vi.spyOn(pool, "query").mockResolvedValueOnce({
-      rows: [{ avg: 99 }],
-    } as any);
+    vi.spyOn(pool, "query").mockResolvedValueOnce({ rows: [{ avg: 99 }] } as any);
 
-    const result = await handleGetAverageScore(req as any, res as any);
-    console.log(result);
+    await handleGetAverageScore(req as any, res as any);
+
     expect(res.json).toHaveBeenCalledWith({ averageScore: 99 });
   });
 });
