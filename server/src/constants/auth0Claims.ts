@@ -1,4 +1,4 @@
 export const AUTH0_CLAIMS = {
-  EMAIL: "https://ai-reviewer.com/email",
-  NICKNAME: "https://ai-reviewer.com/nickname",
+  EMAIL: process.env.AUTH0_CLAIM_EMAIL!,
+  NICKNAME: process.env.AUTH0_CLAIM_NICKNAME!,
 };
