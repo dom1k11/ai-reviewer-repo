@@ -11,13 +11,19 @@ export async function insertReview(userId: number, repoId: number, score: number
 }
 
 export async function getReviewsByUserId(userId: number): Promise<Review[]> {
-  const result = await pool.query("SELECT * FROM reviews WHERE user_id = $1", [userId]);
+  const result = await pool.query(
+    "SELECT id, repo_id, score, created_at FROM reviews WHERE user_id = $1",
+    [userId]
+  );
   return result.rows as Review[];
 }
 
 export async function getReviewById(reviewId: number): Promise<Review> {
   {
-    const result = await pool.query("SELECT * from reviews WHERE id = $1", [reviewId]);
+    const result = await pool.query(
+      "SELECT id, repo_id, score, created_at from reviews WHERE id = $1",
+      [reviewId]
+    );
     return result.rows[0];
   }
 }

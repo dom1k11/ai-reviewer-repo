@@ -6,7 +6,10 @@ export async function findOrCreateUser(
   email: string,
   nickname: string
 ): Promise<User> {
-  let result = await pool.query("SELECT * FROM users WHERE auth0_id = $1", [auth0Id]);
+  let result = await pool.query(
+    "SELECT id, auth0_id, email, nickname, created_at FROM users WHERE auth0_id = $1",
+    [auth0Id]
+  );
 
   if (result.rowCount === 0) {
     result = await pool.query(
@@ -19,15 +22,17 @@ export async function findOrCreateUser(
 }
 
 export async function getUserBySub(auth0Id: string): Promise<User | null> {
-  const result = await pool.query("SELECT * FROM users WHERE auth0_id = $1", [auth0Id]);
+  const result = await pool.query(
+    "SELECT id, auth0_id, email, nickname, created_at FROM users WHERE auth0_id = $1",
+    [auth0Id]
+  );
   return result.rows[0] ?? null;
 }
 
 export async function getUserIdBySub(auth0Id: string): Promise<UserId | null> {
-  const result = await pool.query("SELECT id FROM users WHERE auth0_id = $1", [auth0Id]);
-  return result.rows[0] ?? null;
+  const user = await getUserBySub(auth0Id);
+  return user ? { id: user.id } : null;
 }
-
 export async function getAverageScore(userId: number) {
   const result = await pool.query("SELECT AVG(score) AS avg FROM reviews WHERE user_id = $1", [
     userId,
