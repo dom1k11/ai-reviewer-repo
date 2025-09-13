@@ -1,5 +1,7 @@
 import { githubRequest } from "@/clients/githubClient";
-
+export const GITHUB_ALLOWED_EXTS = process.env.GITHUB_ALLOWED_EXTS
+  ? process.env.GITHUB_ALLOWED_EXTS.split(",")
+  : [".ts", ".js"]; 
 export async function getRepoTree(
   owner: string,
   repo: string,
@@ -45,7 +47,7 @@ export async function filterExts(owner: string, repo: string) {
   try {
     const { tree } = await getRepoTree(owner, repo);
 
-    const ALLOWED_EXTS = [".ts", ".js", ".json", ".html", ".css", ".vue", ".tsx", ".jsx"];
+    const ALLOWED_EXTS = GITHUB_ALLOWED_EXTS;
 
     return tree
       .filter(
